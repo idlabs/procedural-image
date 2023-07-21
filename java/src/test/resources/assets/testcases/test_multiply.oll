@@ -1,0 +1,26 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "multiply",
+          "parameters": {
+              "factor_1": [0.1,0.2,0.3,1],
+              "factor_2": [0.4,0.5,0.6,1]
+          }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}

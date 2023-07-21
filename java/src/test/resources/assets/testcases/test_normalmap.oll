@@ -1,0 +1,26 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "normal_map",
+          "parameters": {
+            "input": [0.2,0.3,0.4,0.5],
+            "intensity" : 1.0
+          }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}

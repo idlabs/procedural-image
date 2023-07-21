@@ -1,0 +1,26 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "grayscale_conversion",
+          "parameters": {
+              "input": [0.1,0.2,0.3,1],
+              "weights": [0.4,0.5,0.6,1]
+          }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}

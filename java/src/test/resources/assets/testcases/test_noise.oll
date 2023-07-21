@@ -1,0 +1,28 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "noise",
+          "parameters": {
+              "position": [0.1,0.2,0.3],
+              "min_level": 0,
+              "max_level": 6,
+              "beta": 1.0
+          }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}

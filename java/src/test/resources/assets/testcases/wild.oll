@@ -1,0 +1,96 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "Procedural Material Editor"
+    },
+    "operations": {
+        "op_0": {
+            "operation": "position",
+            "parameters": {}
+        },
+        "op_1": {
+            "operation": "transformation_trs",
+            "parameters": {
+                "translation": {
+                    "$ref": "#/operations/op_5"
+                },
+                "rotation": [
+                    0,
+                    0,
+                    0
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "input": {
+                    "$ref": "#/operations/op_6"
+                }
+            }
+        },
+        "op_2": {
+            "operation": "position",
+            "parameters": {}
+        },
+        "op_3": {
+            "operation": "noise",
+            "parameters": {
+                "position": {
+                    "$ref": "#/operations/op_2"
+                },
+                "min_level": 0,
+                "max_level": 10,
+                "beta": 1
+            }
+        },
+        "op_4": {
+            "operation": "voronoi",
+            "parameters": {
+                "position": {
+                    "$ref": "#/operations/op_2"
+                },
+                "randomness": 0.9
+            }
+        },
+        "op_5": {
+            "operation": "grayscale_conversion",
+            "parameters": {
+                "input": {
+                    "$ref": "#/operations/op_7"
+                },
+                "weights": [
+                    0,
+                    0,
+                    0,
+                    1
+                ]
+            }
+        },
+        "op_6": {
+            "operation": "noise",
+            "parameters": {
+                "position": {
+                    "$ref": "#/operations/op_0"
+                },
+                "min_level": 0,
+                "max_level": 10,
+                "beta": 1
+            }
+        },
+        "op_7": {
+            "operation": "blur",
+            "parameters": {
+                "intensity": 2,
+                "input": {
+                    "$ref": "#/operations/op_4"
+                }
+            }
+        }
+    },
+    "outputs": {
+        "12345678Output_0": {
+            "$ref": "#/operations/op_1"
+        }
+    }
+}

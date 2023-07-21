@@ -1,0 +1,22 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "position"
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "curve",
+          "parameters": {
+            "input": [0.2,0.3,0.4,0.5],
+            "red": [0,0, 0.1,0.1, 0.3,0.3, 0.4,0.4],
+            "green": [0,0, 0.2,0.2, 0.5,0.5, 0.8,0.8],
+            "blue": [0,0, 0.9,0.9, 0.1,0.1, 0.7,0.7],
+            "alpha": [1,1, 0,0, 0.6,0.6, 0.7,0.7]
+          }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}

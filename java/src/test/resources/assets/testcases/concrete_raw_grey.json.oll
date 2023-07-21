@@ -1,0 +1,3137 @@
+{
+  "asset": {
+    "version": "1.0",
+    "generator": "oll_v1_converter.py"
+  },
+  "operations": {
+    "n10": {
+      "operation": "uniform_color",
+      "parameters": {
+        "output_color": [
+          0.5058820247650146,
+          0.5058820247650146,
+          0.5058820247650146,
+          0.5058820247650146
+        ]
+      }
+    },
+    "n117": {
+      "operation": "position"
+    },
+    "n118": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n117"
+        }
+      }
+    },
+    "n120": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n119"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n14": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n120"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n119": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 3,
+        "max_level": 3,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n118"
+        }
+      }
+    },
+    "n13": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1.1359777450561523,
+          1.1359777450561523,
+          1.1359777450561523,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          0.7464589476585388,
+          0.7464589476585388,
+          0.7464589476585388,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n14"
+        }
+      }
+    },
+    "n16": {
+      "operation": "uniform_color",
+      "parameters": {
+        "output_color": [
+          0.5333330035209656,
+          0.5333330035209656,
+          0.5333330035209656,
+          0.5333330035209656
+        ]
+      }
+    },
+    "n18": {
+      "operation": "uniform_color",
+      "parameters": {
+        "output_color": [
+          0.11520737409591675,
+          0.11520737409591675,
+          0.11520737409591675,
+          1
+        ]
+      }
+    },
+    "n121": {
+      "operation": "position"
+    },
+    "n122": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n121"
+        }
+      }
+    },
+    "n124": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n123"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n23": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n124"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n123": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 3,
+        "max_level": 7,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n122"
+        }
+      }
+    },
+    "n22": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.39364033937454224,
+          0.39364033937454224,
+          0.39364033937454224,
+          0
+        ],
+        "white_point": [
+          0.8190789222717285,
+          0.8190789222717285,
+          0.8190789222717285,
+          1
+        ],
+        "gamma": [
+          0.752122623792534,
+          0.752122623792534,
+          0.752122623792534,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n23"
+        }
+      }
+    },
+    "n21": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.6100000143051147,
+          0.6100000143051147,
+          0.6100000143051147,
+          0
+        ],
+        "white_point": [
+          0.6100000143051147,
+          0.6100000143051147,
+          0.6100000143051147,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n22"
+        }
+      }
+    },
+    "n125": {
+      "operation": "position"
+    },
+    "n126": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          8,
+          8,
+          8,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n125"
+        }
+      }
+    },
+    "n128": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n127"
+        },
+        "weights": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "n32": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n128"
+        },
+        "black_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "white_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "gamma": [
+          0.4,
+          0.4,
+          0.4,
+          0.4
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n127": {
+      "operation": "voronoi",
+      "parameters": {
+        "randomness": 1,
+        "position": {
+          "$ref": "#/operations/n126"
+        }
+      }
+    },
+    "n31": {
+      "operation": "transformation_trs",
+      "parameters": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          8,
+          8,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n32"
+        }
+      }
+    },
+    "n30": {
+      "operation": "blur",
+      "parameters": {
+        "intensity": 0.47999998927116394,
+        "input": {
+          "$ref": "#/operations/n31"
+        }
+      }
+    },
+    "n29": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n30"
+        }
+      }
+    },
+    "n129": {
+      "operation": "position"
+    },
+    "n130": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n129"
+        }
+      }
+    },
+    "n132": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n131"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n37": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n132"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n131": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 0,
+        "max_level": 9,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n130"
+        }
+      }
+    },
+    "n36": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.3958333432674408,
+          0.3958333432674408,
+          0.3958333432674408,
+          0
+        ],
+        "white_point": [
+          0.6217105388641357,
+          0.6217105388641357,
+          0.6217105388641357,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n37"
+        }
+      }
+    },
+    "n35": {
+      "operation": "transformation_trs",
+      "parameters": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0.0174533
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n36"
+        }
+      }
+    },
+    "n34": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0.078125,
+          0.9960780143737793,
+          0.9960780143737793,
+          0.9960780143737793,
+          1,
+          0.46875,
+          0,
+          0,
+          0,
+          1,
+          0.7093750238418579,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n35"
+        }
+      }
+    },
+    "n33": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 0,
+        "foreground": {
+          "$ref": "#/operations/n34"
+        },
+        "background": {
+          "$ref": "#/operations/n36"
+        },
+        "opacity": 0.20000000298023224
+      }
+    },
+    "n28": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n29"
+        },
+        "background": {
+          "$ref": "#/operations/n33"
+        },
+        "opacity": 0.15000000596046448
+      }
+    },
+    "n27": {
+      "operation": "blur",
+      "parameters": {
+        "intensity": 0.5899999737739563,
+        "input": {
+          "$ref": "#/operations/n28"
+        }
+      }
+    },
+    "n26": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.2800000011920929,
+          0.2800000011920929,
+          0.2800000011920929,
+          0
+        ],
+        "white_point": [
+          0.2800000011920929,
+          0.2800000011920929,
+          0.2800000011920929,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n27"
+        }
+      }
+    },
+    "n25": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 0,
+        "foreground": {
+          "$ref": "#/operations/n26"
+        },
+        "background": {
+          "$ref": "#/operations/n28"
+        },
+        "opacity": 0.10000000149011612
+      }
+    },
+    "n24": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0.14984199404716492,
+          0.14984199404716492,
+          0.14984199404716492,
+          0
+        ],
+        "output_to": [
+          0.9132490158081055,
+          0.9132490158081055,
+          0.9132490158081055,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n25"
+        }
+      }
+    },
+    "n20": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 0,
+        "foreground": {
+          "$ref": "#/operations/n21"
+        },
+        "background": {
+          "$ref": "#/operations/n24"
+        },
+        "opacity": 0.09000000357627869
+      }
+    },
+    "n165": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n22"
+        }
+      }
+    },
+    "n19": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 0,
+        "foreground": {
+          "$ref": "#/operations/n20"
+        },
+        "background": {
+          "$ref": "#/operations/n24"
+        },
+        "opacity": {
+          "$ref": "#/operations/n165"
+        }
+      }
+    },
+    "n17": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n18"
+        },
+        "background": {
+          "$ref": "#/operations/n19"
+        },
+        "opacity": 0.20000000298023224
+      }
+    },
+    "n133": {
+      "operation": "position"
+    },
+    "n134": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n133"
+        }
+      }
+    },
+    "n136": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n135"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n40": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n136"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n135": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 0,
+        "max_level": 9,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n134"
+        }
+      }
+    },
+    "n39": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.3804824650287628,
+          0.3804824650287628,
+          0.3804824650287628,
+          0
+        ],
+        "white_point": [
+          0.5822368264198303,
+          0.5822368264198303,
+          0.5822368264198303,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n40"
+        }
+      }
+    },
+    "n38": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.5099999904632568,
+          0.5099999904632568,
+          0.5099999904632568,
+          0
+        ],
+        "white_point": [
+          0.5299999713897705,
+          0.5299999713897705,
+          0.5299999713897705,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n39"
+        }
+      }
+    },
+    "n166": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.7799999713897705,
+          0.7799999713897705,
+          0.7799999713897705,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n38"
+        }
+      }
+    },
+    "n15": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 0,
+        "foreground": {
+          "$ref": "#/operations/n16"
+        },
+        "background": {
+          "$ref": "#/operations/n17"
+        },
+        "opacity": {
+          "$ref": "#/operations/n166"
+        }
+      }
+    },
+    "n12": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 3,
+        "foreground": {
+          "$ref": "#/operations/n13"
+        },
+        "background": {
+          "$ref": "#/operations/n15"
+        },
+        "opacity": 0.4099999964237213
+      }
+    },
+    "n11": {
+      "operation": "blur",
+      "parameters": {
+        "intensity": 0.05000000074505806,
+        "input": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n137": {
+      "operation": "position"
+    },
+    "n138": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n137"
+        }
+      }
+    },
+    "n140": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n139"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n43": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n140"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n139": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 3,
+        "max_level": 7,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n138"
+        }
+      }
+    },
+    "n42": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.4506579041481018,
+          0.4506579041481018,
+          0.4506579041481018,
+          0
+        ],
+        "white_point": [
+          0.7247806787490845,
+          0.7247806787490845,
+          0.7247806787490845,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n43"
+        }
+      }
+    },
+    "n41": {
+      "operation": "transformation_trs",
+      "parameters": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0.0174533
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n42"
+        }
+      }
+    },
+    "n167": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n41"
+        }
+      }
+    },
+    "n9": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 0,
+        "foreground": {
+          "$ref": "#/operations/n10"
+        },
+        "background": {
+          "$ref": "#/operations/n11"
+        },
+        "opacity": {
+          "$ref": "#/operations/n167"
+        }
+      }
+    },
+    "n8": {
+      "operation": "normal_map",
+      "parameters": {
+        "intensity": 3,
+        "input": {
+          "$ref": "#/operations/n9"
+        }
+      }
+    },
+    "n7": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "weights": [
+          0.33000001311302185,
+          0.33000001311302185,
+          0.33000001311302185,
+          0
+        ],
+        "input": {
+          "$ref": "#/operations/n8"
+        }
+      }
+    },
+    "n6": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.4879385828971863,
+          0.4879385828971863,
+          0.4879385828971863,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          0.7662465618605047,
+          0.7662465618605047,
+          0.7662465618605047,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n7"
+        }
+      }
+    },
+    "n5": {
+      "operation": "blur",
+      "parameters": {
+        "intensity": 0.7199999690055847,
+        "input": {
+          "$ref": "#/operations/n6"
+        }
+      }
+    },
+    "n4": {
+      "operation": "transformation_trs",
+      "parameters": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          -1,
+          -1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n5"
+        }
+      }
+    },
+    "n3": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [],
+        "input": {
+          "$ref": "#/operations/n4"
+        }
+      }
+    },
+    "n53": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.35855263471603394,
+          0.35855263471603394,
+          0.35855263471603394,
+          0
+        ],
+        "white_point": [
+          0.5032894611358643,
+          0.5032894611358643,
+          0.5032894611358643,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n55": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.1940789520740509,
+          0.1940789520740509,
+          0.1940789520740509,
+          0
+        ],
+        "white_point": [
+          0.367324560880661,
+          0.367324560880661,
+          0.367324560880661,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n54": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n55"
+        }
+      }
+    },
+    "n52": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 1,
+        "foreground": {
+          "$ref": "#/operations/n53"
+        },
+        "background": {
+          "$ref": "#/operations/n54"
+        },
+        "opacity": 1
+      }
+    },
+    "n51": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.08223684132099152,
+          0.08223684132099152,
+          0.08223684132099152,
+          0
+        ],
+        "white_point": [
+          0.03618421033024788,
+          0.03618421033024788,
+          0.03618421033024788,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n52"
+        }
+      }
+    },
+    "n50": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n51"
+        }
+      }
+    },
+    "n56": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.9699999690055847,
+          0.9699999690055847,
+          0.9699999690055847,
+          0
+        ],
+        "white_point": [
+          0.9399999976158142,
+          0.9399999976158142,
+          0.9399999976158142,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n52"
+        }
+      }
+    },
+    "n49": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 3,
+        "foreground": {
+          "$ref": "#/operations/n50"
+        },
+        "background": {
+          "$ref": "#/operations/n56"
+        },
+        "opacity": 0.8899999856948853
+      }
+    },
+    "n141": {
+      "operation": "position"
+    },
+    "n142": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n141"
+        }
+      }
+    },
+    "n144": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n143"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n57": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n144"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n143": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 6,
+        "max_level": 6,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n142"
+        }
+      }
+    },
+    "n48": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n49"
+        },
+        "background": {
+          "$ref": "#/operations/n57"
+        },
+        "opacity": 0.9699999690055847
+      }
+    },
+    "n47": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n48"
+        }
+      }
+    },
+    "n145": {
+      "operation": "position"
+    },
+    "n146": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n145"
+        }
+      }
+    },
+    "n148": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n147"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n61": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n148"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n147": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 6,
+        "max_level": 6,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n146"
+        }
+      }
+    },
+    "n60": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.36513158679008484,
+          0.36513158679008484,
+          0.36513158679008484,
+          0
+        ],
+        "white_point": [
+          0.5230262875556946,
+          0.5230262875556946,
+          0.5230262875556946,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n61"
+        }
+      }
+    },
+    "n63": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.6699561476707458,
+          0.6699561476707458,
+          0.6699561476707458,
+          0
+        ],
+        "white_point": [
+          0.38486841320991516,
+          0.38486841320991516,
+          0.38486841320991516,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n52"
+        }
+      }
+    },
+    "n62": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n63"
+        },
+        "background": {
+          "$ref": "#/operations/n56"
+        },
+        "opacity": 1
+      }
+    },
+    "n59": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n60"
+        },
+        "background": {
+          "$ref": "#/operations/n62"
+        },
+        "opacity": 1
+      }
+    },
+    "n58": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n59"
+        }
+      }
+    },
+    "n46": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 3,
+        "foreground": {
+          "$ref": "#/operations/n47"
+        },
+        "background": {
+          "$ref": "#/operations/n58"
+        },
+        "opacity": 0.7299999594688416
+      }
+    },
+    "n45": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0.00940439011901617,
+          0.3184100091457367,
+          0.3248949944972992,
+          0.3960779905319214,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n46"
+        }
+      }
+    },
+    "n67": {
+      "operation": "uniform_color",
+      "parameters": {
+        "output_color": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "n149": {
+      "operation": "position"
+    },
+    "n150": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n149"
+        }
+      }
+    },
+    "n152": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n151"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n71": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n152"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n151": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 7,
+        "max_level": 10,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n150"
+        }
+      }
+    },
+    "n70": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.39364033937454224,
+          0.39364033937454224,
+          0.39364033937454224,
+          0
+        ],
+        "white_point": [
+          0.656798243522644,
+          0.656798243522644,
+          0.656798243522644,
+          1
+        ],
+        "gamma": [
+          3.4096384048461914,
+          3.4096384048461914,
+          3.4096384048461914,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n71"
+        }
+      }
+    },
+    "n69": {
+      "operation": "blur",
+      "parameters": {
+        "intensity": 0.5999999642372131,
+        "input": {
+          "$ref": "#/operations/n70"
+        }
+      }
+    },
+    "n68": {
+      "operation": "transformation_trs",
+      "parameters": {
+        "translation": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          4,
+          4,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n69"
+        }
+      }
+    },
+    "n168": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n42"
+        }
+      }
+    },
+    "n66": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 0,
+        "foreground": {
+          "$ref": "#/operations/n67"
+        },
+        "background": {
+          "$ref": "#/operations/n68"
+        },
+        "opacity": {
+          "$ref": "#/operations/n168"
+        }
+      }
+    },
+    "n65": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0.8244510293006897,
+          0.9803919792175293,
+          0.9803919792175293,
+          0.9803919792175293,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n66"
+        }
+      }
+    },
+    "n153": {
+      "operation": "position"
+    },
+    "n154": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n153"
+        }
+      }
+    },
+    "n156": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n155"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n75": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n156"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n155": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 7,
+        "max_level": 7,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n154"
+        }
+      }
+    },
+    "n74": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.36513158679008484,
+          0.36513158679008484,
+          0.36513158679008484,
+          0
+        ],
+        "white_point": [
+          0.7313596606254578,
+          0.7313596606254578,
+          0.7313596606254578,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n75"
+        }
+      }
+    },
+    "n73": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [],
+        "input": {
+          "$ref": "#/operations/n74"
+        }
+      }
+    },
+    "n77": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [],
+        "input": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n83": {
+      "operation": "normal_map",
+      "parameters": {
+        "intensity": 0.7900000214576721,
+        "input": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n82": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "weights": [
+          0.33000001311302185,
+          0.33000001311302185,
+          0.33000001311302185,
+          0
+        ],
+        "input": {
+          "$ref": "#/operations/n83"
+        }
+      }
+    },
+    "n81": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.4638157784938812,
+          0.4638157784938812,
+          0.4638157784938812,
+          0
+        ],
+        "white_point": [
+          0.9111841917037964,
+          0.9111841917037964,
+          0.9111841917037964,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n82"
+        }
+      }
+    },
+    "n80": {
+      "operation": "blur",
+      "parameters": {
+        "intensity": 0.7199999690055847,
+        "input": {
+          "$ref": "#/operations/n81"
+        }
+      }
+    },
+    "n79": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n80"
+        }
+      }
+    },
+    "n86": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.4638157784938812,
+          0.4638157784938812,
+          0.4638157784938812,
+          0
+        ],
+        "white_point": [
+          0.9111841917037964,
+          0.9111841917037964,
+          0.9111841917037964,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n82"
+        }
+      }
+    },
+    "n85": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n86"
+        }
+      }
+    },
+    "n88": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [],
+        "input": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n94": {
+      "operation": "blur",
+      "parameters": {
+        "intensity": 0.12999999523162842,
+        "input": {
+          "$ref": "#/operations/n30"
+        }
+      }
+    },
+    "n93": {
+      "operation": "normal_map",
+      "parameters": {
+        "intensity": 0.23999999463558197,
+        "input": {
+          "$ref": "#/operations/n94"
+        }
+      }
+    },
+    "n92": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "weights": [
+          0.33000001311302185,
+          0.33000001311302185,
+          0.33000001311302185,
+          0
+        ],
+        "input": {
+          "$ref": "#/operations/n93"
+        }
+      }
+    },
+    "n91": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.5888158082962036,
+          0.5888158082962036,
+          0.5888158082962036,
+          0
+        ],
+        "white_point": [
+          0.7489035129547119,
+          0.7489035129547119,
+          0.7489035129547119,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n92"
+        }
+      }
+    },
+    "n90": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          0.984375,
+          0.01568629965186119,
+          0.01568629965186119,
+          0.01568629965186119,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n91"
+        }
+      }
+    },
+    "n157": {
+      "operation": "position"
+    },
+    "n158": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n157"
+        }
+      }
+    },
+    "n160": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n159"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n97": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n160"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n159": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 1,
+        "max_level": 1,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n158"
+        }
+      }
+    },
+    "n96": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0,
+          0.6901959776878357,
+          0.5766990184783936,
+          0.4899060130119324,
+          1,
+          1,
+          0.5254899859428406,
+          0.31993600726127625,
+          0.17309799790382385,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n97"
+        }
+      }
+    },
+    "n99": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [],
+        "input": {
+          "$ref": "#/operations/n29"
+        }
+      }
+    },
+    "n100": {
+      "operation": "uniform_color",
+      "parameters": {
+        "output_color": [
+          0.8313725590705872,
+          0.8666666746139526,
+          0.8941176533699036,
+          1
+        ]
+      }
+    },
+    "n98": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n99"
+        },
+        "background": {
+          "$ref": "#/operations/n100"
+        },
+        "opacity": 0.029999999329447746
+      }
+    },
+    "n95": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 3,
+        "foreground": {
+          "$ref": "#/operations/n96"
+        },
+        "background": {
+          "$ref": "#/operations/n98"
+        },
+        "opacity": 0.07999999821186066
+      }
+    },
+    "n89": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n90"
+        },
+        "background": {
+          "$ref": "#/operations/n95"
+        },
+        "opacity": 0.0851999968290329
+      }
+    },
+    "n87": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 0,
+        "foreground": {
+          "$ref": "#/operations/n88"
+        },
+        "background": {
+          "$ref": "#/operations/n89"
+        },
+        "opacity": 0.03999999910593033
+      }
+    },
+    "n84": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 3,
+        "foreground": {
+          "$ref": "#/operations/n85"
+        },
+        "background": {
+          "$ref": "#/operations/n87"
+        },
+        "opacity": 0.05000000074505806
+      }
+    },
+    "n78": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n79"
+        },
+        "background": {
+          "$ref": "#/operations/n84"
+        },
+        "opacity": 0.10000000149011612
+      }
+    },
+    "n76": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 1,
+        "foreground": {
+          "$ref": "#/operations/n77"
+        },
+        "background": {
+          "$ref": "#/operations/n78"
+        },
+        "opacity": 0.07999999821186066
+      }
+    },
+    "n72": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 1,
+        "foreground": {
+          "$ref": "#/operations/n73"
+        },
+        "background": {
+          "$ref": "#/operations/n76"
+        },
+        "opacity": 0.009999999776482582
+      }
+    },
+    "n64": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n65"
+        },
+        "background": {
+          "$ref": "#/operations/n72"
+        },
+        "opacity": 0.41999998688697815
+      }
+    },
+    "n44": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 3,
+        "foreground": {
+          "$ref": "#/operations/n45"
+        },
+        "background": {
+          "$ref": "#/operations/n64"
+        },
+        "opacity": 0.5899999737739563
+      }
+    },
+    "n2": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n3"
+        },
+        "background": {
+          "$ref": "#/operations/n44"
+        },
+        "opacity": 0.25
+      }
+    },
+    "n1": {
+      "operation": "sharpen",
+      "parameters": {
+        "intensity": 0.25999999046325684,
+        "input": {
+          "$ref": "#/operations/n2"
+        }
+      }
+    },
+    "n104": {
+      "operation": "blur",
+      "parameters": {
+        "intensity": 0.029999999329447746,
+        "input": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n103": {
+      "operation": "normal_map",
+      "parameters": {
+        "intensity": 1,
+        "input": {
+          "$ref": "#/operations/n104"
+        }
+      }
+    },
+    "n102": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n103"
+        }
+      }
+    },
+    "n109": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0.5,
+          0.011764699593186378,
+          0.011764699593186378,
+          0.011764699593186378,
+          1,
+          0.6937500238418579,
+          0.5607839822769165,
+          0.5607839822769165,
+          0.5607839822769165,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n91"
+        }
+      }
+    },
+    "n112": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "output_to": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n161": {
+      "operation": "position"
+    },
+    "n162": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n161"
+        }
+      }
+    },
+    "n164": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n163"
+        },
+        "weights": [
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "n115": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n164"
+        },
+        "black_point": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "white_point": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "n163": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 2,
+        "max_level": 6,
+        "beta": 0,
+        "position": {
+          "$ref": "#/operations/n162"
+        }
+      }
+    },
+    "n114": {
+      "operation": "levels",
+      "parameters": {
+        "black_point": [
+          0.48355263471603394,
+          0.48355263471603394,
+          0.48355263471603394,
+          0
+        ],
+        "white_point": [
+          0.5997806787490845,
+          0.5997806787490845,
+          0.5997806787490845,
+          1
+        ],
+        "gamma": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "output_from": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "output_to": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "input": {
+          "$ref": "#/operations/n115"
+        }
+      }
+    },
+    "n116": {
+      "operation": "uniform_color",
+      "parameters": {
+        "output_color": [
+          0.49803921580314636,
+          0.49803921580314636,
+          0.49803921580314636,
+          1
+        ]
+      }
+    },
+    "n113": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 1,
+        "foreground": {
+          "$ref": "#/operations/n114"
+        },
+        "background": {
+          "$ref": "#/operations/n116"
+        },
+        "opacity": 0.08999999612569809
+      }
+    },
+    "n111": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 3,
+        "foreground": {
+          "$ref": "#/operations/n112"
+        },
+        "background": {
+          "$ref": "#/operations/n113"
+        },
+        "opacity": 0.10000000149011612
+      }
+    },
+    "n110": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 1,
+        "foreground": {
+          "$ref": "#/operations/n30"
+        },
+        "background": {
+          "$ref": "#/operations/n111"
+        },
+        "opacity": 0.03999999910593033
+      }
+    },
+    "n108": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n109"
+        },
+        "background": {
+          "$ref": "#/operations/n110"
+        },
+        "opacity": 0.25999999046325684
+      }
+    },
+    "n107": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 2,
+        "foreground": {
+          "$ref": "#/operations/n86"
+        },
+        "background": {
+          "$ref": "#/operations/n108"
+        },
+        "opacity": 0.15000000596046448
+      }
+    },
+    "n106": {
+      "operation": "blend",
+      "parameters": {
+        "blend_mode": 1,
+        "foreground": {
+          "$ref": "#/operations/n80"
+        },
+        "background": {
+          "$ref": "#/operations/n107"
+        },
+        "opacity": 0.5
+      }
+    }
+  },
+  "outputs": {
+    "12345678base_color": {
+      "$ref": "#/operations/n1"
+    },
+    "12345679normal": {
+      "$ref": "#/operations/n102"
+    },
+    "12345670roughness": {
+      "$ref": "#/operations/n106"
+    }
+  }
+}

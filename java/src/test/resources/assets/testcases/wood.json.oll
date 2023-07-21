@@ -1,0 +1,892 @@
+{
+  "asset": {
+    "version": "1.0",
+    "generator": "oll_v1_converter.py"
+  },
+  "operations": {
+    "n0": {
+      "operation": "position",
+      "parameters": {}
+    },
+    "n1000": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n0"
+        },
+        "factor_2": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "n1": {
+      "operation": "add",
+      "parameters": {
+        "summand_1": {
+          "$ref": "#/operations/n1000"
+        },
+        "summand_2": [
+          0.0,
+          0.0,
+          -20.1,
+          0.0
+        ]
+      }
+    },
+    "n2": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n1"
+        },
+        "factor_2": [
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ]
+      }
+    },
+    "n3": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n2"
+        },
+        "factor_2": [
+          9.892,
+          9.892,
+          9.892,
+          1.0
+        ]
+      }
+    },
+    "n4": {
+      "operation": "voronoi",
+      "parameters": {
+        "position": {
+          "$ref": "#/operations/n3"
+        },
+        "randomness": 0.069
+      }
+    },
+    "n1004": {
+      "operation": "divide",
+      "parameters": {
+        "dividend": {
+          "$ref": "#/operations/n4"
+        },
+        "divisor": [
+          9.892,
+          9.892,
+          9.892,
+          1.0
+        ]
+      }
+    },
+    "n5": {
+      "operation": "noise",
+      "parameters": {
+        "position": {
+          "$ref": "#/operations/n1004"
+        },
+        "min_level": 10,
+        "max_level": 10,
+        "beta": 1.0
+      }
+    },
+    "n6": {
+      "operation": "add",
+      "parameters": {
+        "summand_1": {
+          "$ref": "#/operations/n5"
+        },
+        "summand_2": [
+          -0.5,
+          -0.5,
+          -0.5,
+          0.0
+        ]
+      }
+    },
+    "n7": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n6"
+        },
+        "factor_2": [
+          0.3,
+          0.4,
+          100.0,
+          1.0
+        ]
+      }
+    },
+    "n8": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n1004"
+        },
+        "weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "n9": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n7"
+        },
+        "weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "n10": {
+      "operation": "add",
+      "parameters": {
+        "summand_1": {
+          "$ref": "#/operations/n8"
+        },
+        "summand_2": {
+          "$ref": "#/operations/n9"
+        }
+      }
+    },
+    "n11": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n7"
+        },
+        "weights": [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "n12": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n7"
+        },
+        "weights": [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ]
+      }
+    },
+    "n13": {
+      "operation": "combine",
+      "parameters": {
+        "red": {
+          "$ref": "#/operations/n10"
+        },
+        "green": {
+          "$ref": "#/operations/n11"
+        },
+        "blue": {
+          "$ref": "#/operations/n12"
+        },
+        "alpha": 0.0
+      }
+    },
+    "n14": {
+      "operation": "subtract",
+      "parameters": {
+        "minuend": {
+          "$ref": "#/operations/n1000"
+        },
+        "subtrahend": {
+          "$ref": "#/operations/n13"
+        }
+      }
+    },
+    "n15": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n14"
+        },
+        "factor_2": [
+          1.0,
+          1.0,
+          0.3,
+          1.0
+        ]
+      }
+    },
+    "n16": {
+      "operation": "noise",
+      "parameters": {
+        "position": {
+          "$ref": "#/operations/n15"
+        },
+        "min_level": 0,
+        "max_level": 16,
+        "beta": 1.0
+      }
+    },
+    "n17": {
+      "operation": "subtract",
+      "parameters": {
+        "minuend": {
+          "$ref": "#/operations/n16"
+        },
+        "subtrahend": [
+          0.5,
+          0.5,
+          0.5,
+          1.0
+        ]
+      }
+    },
+    "n18": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n14"
+        },
+        "factor_2": [
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ]
+      }
+    },
+    "n19": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.237,
+        "background": {
+          "$ref": "#/operations/n18"
+        },
+        "foreground": {
+          "$ref": "#/operations/n17"
+        },
+        "blend_mode": 1
+      }
+    },
+    "n20": {
+      "operation": "l2_norm",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n19"
+        }
+      }
+    },
+    "n21": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n20"
+        },
+        "factor_2": [
+          120.0,
+          120.0,
+          120.0,
+          1.0
+        ]
+      }
+    },
+    "n22": {
+      "operation": "sawtooth_wave",
+      "parameters": {
+        "vector": {
+          "$ref": "#/operations/n21"
+        }
+      }
+    },
+    "n23": {
+      "operation": "curve",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n22"
+        },
+        "red": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "green": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "blue": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.1,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          0.0
+        ],
+        "alpha": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "n24": {
+      "operation": "divide",
+      "parameters": {
+        "dividend": {
+          "$ref": "#/operations/n23"
+        },
+        "divisor": [
+          0.479,
+          0.479,
+          0.479,
+          1.0
+        ]
+      }
+    },
+    "n25": {
+      "operation": "subtract",
+      "parameters": {
+        "minuend": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "subtrahend": {
+          "$ref": "#/operations/n24"
+        }
+      }
+    },
+    "n2001": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.99,
+        "background": {
+          "$ref": "#/operations/n14"
+        },
+        "foreground": [
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "blend_mode": 3
+      }
+    },
+    "n2002": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n2001"
+        },
+        "factor_2": [
+          1226.9,
+          1226.9,
+          1226.9,
+          1.0
+        ]
+      }
+    },
+    "n2003": {
+      "operation": "voronoi",
+      "parameters": {
+        "position": {
+          "$ref": "#/operations/n2002"
+        },
+        "randomness": 1.0
+      }
+    },
+    "n2004": {
+      "operation": "divide",
+      "parameters": {
+        "dividend": {
+          "$ref": "#/operations/n2003"
+        },
+        "divisor": [
+          1226.9,
+          1226.9,
+          1226.9,
+          1.0
+        ]
+      }
+    },
+    "n2005": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n2004"
+        },
+        "weights": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      }
+    },
+    "n2006": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n2005"
+        },
+        "factor_2": {
+          "$ref": "#/operations/n2005"
+        }
+      }
+    },
+    "n2007": {
+      "operation": "subtract",
+      "parameters": {
+        "minuend": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "subtrahend": {
+          "$ref": "#/operations/n2006"
+        }
+      }
+    },
+    "n2010": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.95,
+        "background": {
+          "$ref": "#/operations/n14"
+        },
+        "foreground": [
+          1.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        "blend_mode": 3
+      }
+    },
+    "n2011": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n2010"
+        },
+        "factor_2": [
+          600.0,
+          600.0,
+          600.0,
+          1.0
+        ]
+      }
+    },
+    "n2012": {
+      "operation": "voronoi",
+      "parameters": {
+        "position": {
+          "$ref": "#/operations/n2011"
+        },
+        "randomness": 1.0
+      }
+    },
+    "n2013": {
+      "operation": "divide",
+      "parameters": {
+        "dividend": {
+          "$ref": "#/operations/n2012"
+        },
+        "divisor": [
+          600.0,
+          600.0,
+          600.0,
+          1.0
+        ]
+      }
+    },
+    "n2014": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n2013"
+        },
+        "weights": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      }
+    },
+    "n2015": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": {
+          "$ref": "#/operations/n2014"
+        },
+        "factor_2": {
+          "$ref": "#/operations/n2014"
+        }
+      }
+    },
+    "n2016": {
+      "operation": "subtract",
+      "parameters": {
+        "minuend": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "subtrahend": {
+          "$ref": "#/operations/n2015"
+        }
+      }
+    },
+    "n2020": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 1.0,
+        "background": {
+          "$ref": "#/operations/n19"
+        },
+        "foreground": [
+          0.119,
+          0.119,
+          0.119,
+          0.119
+        ],
+        "blend_mode": 4
+      }
+    },
+    "n2021": {
+      "operation": "l2_norm",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n2020"
+        }
+      }
+    },
+    "n2024": {
+      "operation": "divide",
+      "parameters": {
+        "dividend": [
+          0.02,
+          0.02,
+          0.02,
+          1.0
+        ],
+        "divisor": {
+          "$ref": "#/operations/n2021"
+        }
+      }
+    },
+    "n2030": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.547,
+        "foreground": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "background": {
+          "$ref": "#/operations/n25"
+        },
+        "blend_mode": 0
+      }
+    },
+    "n2031": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.547,
+        "foreground": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "background": {
+          "$ref": "#/operations/n2007"
+        },
+        "blend_mode": 0
+      }
+    },
+    "n2032": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.746,
+        "background": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "foreground": {
+          "$ref": "#/operations/n2016"
+        },
+        "blend_mode": 0
+      }
+    },
+    "n2033": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": {
+          "$ref": "#/operations/n24"
+        },
+        "foreground": {
+          "$ref": "#/operations/n2031"
+        },
+        "background": {
+          "$ref": "#/operations/n2032"
+        },
+        "blend_mode": 0
+      }
+    },
+    "n2034": {
+      "operation": "add",
+      "parameters": {
+        "summand_1": {
+          "$ref": "#/operations/n2033"
+        },
+        "summand_2": {
+          "$ref": "#/operations/n2030"
+        }
+      }
+    },
+    "n2035": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.07,
+        "foreground": {
+          "$ref": "#/operations/n2024"
+        },
+        "background": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "blend_mode": 0
+      }
+    },
+    "n2036": {
+      "operation": "add",
+      "parameters": {
+        "summand_1": {
+          "$ref": "#/operations/n2035"
+        },
+        "summand_2": {
+          "$ref": "#/operations/n2034"
+        }
+      }
+    },
+    "n2037": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": {
+          "$ref": "#/operations/n2036"
+        },
+        "foreground": [
+          0.761,
+          0.616,
+          0.4393,
+          1.0
+        ],
+        "background": [
+          0.663,
+          0.49,
+          0.357,
+          1.0
+        ],
+        "blend_mode": 0
+      }
+    },
+    "n2040": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.3,
+        "foreground": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "background": {
+          "$ref": "#/operations/n24"
+        },
+        "blend_mode": 0
+      }
+    },
+    "n2041": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.2,
+        "foreground": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "background": {
+          "$ref": "#/operations/n2006"
+        },
+        "blend_mode": 0
+      }
+    },
+    "n2042": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": 0.1,
+        "foreground": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "background": {
+          "$ref": "#/operations/n2015"
+        },
+        "blend_mode": 0
+      }
+    },
+    "n2043": {
+      "operation": "blend",
+      "parameters": {
+        "opacity": {
+          "$ref": "#/operations/n24"
+        },
+        "foreground": {
+          "$ref": "#/operations/n2041"
+        },
+        "background": {
+          "$ref": "#/operations/n2042"
+        },
+        "blend_mode": 0
+      }
+    },
+    "n2044": {
+      "operation": "add",
+      "parameters": {
+        "summand_1": {
+          "$ref": "#/operations/n2043"
+        },
+        "summand_2": {
+          "$ref": "#/operations/n2040"
+        }
+      }
+    },
+    "n2045": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n2044"
+        },
+        "weights": [
+          1.0,
+          1.0,
+          1.0,
+          0.0
+        ]
+      }
+    },
+    "n2048": {
+      "operation": "normal_map",
+      "parameters": {
+        "intensity": 0.8,
+        "input": {
+          "$ref": "#/operations/n2045"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "12345678planks": {
+      "$ref": "#/operations/n13"
+    },
+    "12345679offset": {
+      "$ref": "#/operations/n14"
+    },
+    "12345670stretch": {
+      "$ref": "#/operations/n15"
+    },
+    "12345674distortion": {
+      "$ref": "#/operations/n19"
+    },
+    "12345645rings": {
+      "$ref": "#/operations/n22"
+    },
+    "12345633latewood": {
+      "$ref": "#/operations/n2007"
+    },
+    "12345612earlywood": {
+      "$ref": "#/operations/n2016"
+    },
+    "12345691heartwood": {
+      "$ref": "#/operations/n2024"
+    },
+    "12345623base_color": {
+      "$ref": "#/operations/n2037"
+    },
+    "12345601normal": {
+      "$ref": "#/operations/n2048"
+    }
+  }
+}

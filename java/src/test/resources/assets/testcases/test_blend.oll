@@ -1,0 +1,64 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+            "operation": "blend",
+            "parameters": {
+                "blend_mode": 0,
+                "foreground": [0.1,0.2,0.3,1],
+                "background": [0.4,0.5,0.6,1],
+                "opacity": 0.543
+            }
+        },
+        "n2": {
+            "operation": "blend",
+            "parameters": {
+                "blend_mode": 1,
+                "foreground": { "$ref": "#/operations/n1" },
+                "background": [0.1,0.2,0.3,1],
+                "opacity": 0.1
+            }
+        },
+        "n3": {
+            "operation": "blend",
+            "parameters": {
+                "blend_mode": 2,
+                "foreground": { "$ref": "#/operations/n2" },
+                "background": { "$ref": "#/operations/n1" },
+                "opacity": 0.1
+            }
+        },
+        "n4": {
+            "operation": "blend",
+            "parameters": {
+                "blend_mode": 3,
+                "foreground": { "$ref": "#/operations/n2" },
+                "background": { "$ref": "#/operations/n1" },
+                "opacity": { "$ref": "#/operations/n5" } 
+            }
+        },
+        "n5": {
+            "operation": "blend",
+            "parameters": {
+                "blend_mode": 4,
+                "foreground": [0.7,0.8,0.9,1],
+                "background": [0.9,0.8,0.7,1],
+                "opacity": 0.444
+            }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n2"
+        },
+        "normal": {
+            "$ref": "#/operations/n3"
+        }
+    }
+}

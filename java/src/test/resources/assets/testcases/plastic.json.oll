@@ -1,0 +1,219 @@
+{
+  "asset": {
+    "version": "1.0",
+    "generator": "oll_v1_converter.py"
+  },
+  "operations": {
+    "n1": {
+      "operation": "uniform_color",
+      "parameters": {
+        "output_color": [
+          0.10000000149011612,
+          0.10000000149011612,
+          0.10000000149011612,
+          1.0
+        ]
+      }
+    },
+    "n8": {
+      "operation": "position"
+    },
+    "n9": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n8"
+        }
+      }
+    },
+    "n11": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n10"
+        },
+        "weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "n4": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n11"
+        },
+        "black_point": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "white_point": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "gamma": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "output_from": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "output_to": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "n10": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 5,
+        "max_level": 6,
+        "beta": 0.0,
+        "position": {
+          "$ref": "#/operations/n9"
+        }
+      }
+    },
+    "n3": {
+      "operation": "normal_map",
+      "parameters": {
+        "intensity": 1.0,
+        "input": {
+          "$ref": "#/operations/n4"
+        }
+      }
+    },
+    "n12": {
+      "operation": "position"
+    },
+    "n13": {
+      "operation": "multiply",
+      "parameters": {
+        "factor_1": [
+          0.5,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "factor_2": {
+          "$ref": "#/operations/n12"
+        }
+      }
+    },
+    "n15": {
+      "operation": "grayscale_conversion",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n14"
+        },
+        "weights": [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "n7": {
+      "operation": "levels",
+      "parameters": {
+        "input": {
+          "$ref": "#/operations/n15"
+        },
+        "black_point": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "white_point": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "gamma": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "output_from": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "output_to": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "n14": {
+      "operation": "noise",
+      "parameters": {
+        "min_level": 3,
+        "max_level": 7,
+        "beta": 0.0,
+        "position": {
+          "$ref": "#/operations/n13"
+        }
+      }
+    },
+    "n6": {
+      "operation": "colorize",
+      "parameters": {
+        "keys": [
+          0.048929665237665176,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.853210985660553,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "input": {
+          "$ref": "#/operations/n7"
+        }
+      }
+    }
+  },
+  "outputs": {
+    "12345678base_color": {
+      "$ref": "#/operations/n1"
+    },
+    "12345670normal": {
+      "$ref": "#/operations/n3"
+    },
+    "12345679roughness": {
+      "$ref": "#/operations/n6"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "levels",
+          "parameters": {
+            "black_point": [0.1,0.1,0.1,0.0],
+            "gamma": [1.0,1.0,1.0,1.0],
+            "white_point": [0.82,1.0,0.5,0.1],
+            "output_from": [0.0,0.0,0.0,0.0],
+            "output_to": [1.0,1.0,1.0,1.0],
+            "input": [0.2,0.3,0.4,0.5]
+          }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}
