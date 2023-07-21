@@ -92,7 +92,6 @@ public abstract class OperatorImplementation {
 
         public static final int FLOAT_SIZE_IN_BYTES = Float.BYTES;
         public static final int VEC4_SIZE_IN_BYTES = 4 * Float.BYTES;
-        public static final int VEC3_SIZE_IN_BYTES = 3 * Float.BYTES;
 
         protected FloatInputData(float[] inData) {
             add(inData);

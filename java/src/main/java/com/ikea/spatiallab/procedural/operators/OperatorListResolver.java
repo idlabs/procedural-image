@@ -261,7 +261,7 @@ public class OperatorListResolver {
                     throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "Input is null");
                 }
                 if (index.type == IndexType.INDEX_INPUT_VEC4 || index.type == IndexType.INDEX_INPUT_VEC3) {
-                    inputsize += input.getByteSize();
+                    inputsize += FloatInputData.VEC4_SIZE_IN_BYTES;
                 }
             }
         }
