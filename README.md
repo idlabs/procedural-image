@@ -129,7 +129,7 @@ Output contains the normalized world position of the fragment in the range [-1.0
 Operator name: `voronoi`
 
 **parameters**
-- `position` vec3
+- `input` vec3
 - `randomness` float
 
 Output:
@@ -144,7 +144,7 @@ A vec4 containing the cell center position in the first three components, in the
 Operator name: `sawtooth_wave`
 
 **parameters**
-- `vector` vec3
+- `input` vec3
 
 Applies a sawtooth wave function to each channel of the input vector.
 
@@ -156,7 +156,7 @@ Applies a sawtooth wave function to each channel of the input vector.
 Operator name: `linear_to_srgb`
 
 **parameters**
-- `linear` vec4
+- `input` vec4
 
 Converts [linear color inputs to sRGB](https://en.wikipedia.org/wiki/SRGB#From_CIE_XYZ_to_sRGB)
 
@@ -165,7 +165,7 @@ Converts [linear color inputs to sRGB](https://en.wikipedia.org/wiki/SRGB#From_C
 Operator name:`srgb_to_linear`
 
 **parameters**
-- `srgb` vec4
+- `input` vec4
 
 Converts [sRGB color inputs to linear](https://en.wikipedia.org/wiki/SRGB#From_sRGB_to_CIE_XYZ)
 
@@ -189,13 +189,10 @@ Each channel `red`, `green` and `blue`'s bezier curve is specified by an array o
 
 
 ### Noise
-Operation name:
+Operator name:`noise`
 
-`noise`
-
-Input:
-
-- `position` vec3
+**Parameters**
+- `input` vec3
 - `min_level` int
 - `max_level` int
 - `beta` float
@@ -206,26 +203,13 @@ Creates a brownian noise that consists of multiple octaves of noise laid over ea
 
 `beta` is used to specify the [color of the noise](https://en.wikipedia.org/wiki/Colors_of_noise).
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `position` *Position Operation Output* <br> `min_level` 0 <br> `max_level` 6 <br> `beta` 1.0  | ![](figures/output/operations.noise.noise_0_6_1.000000.jpg) |
-| `position` *Position Operation Output* <br> `min_level` 0 <br> `max_level` 0 <br> `beta` 1.0  | ![](figures/output/operations.noise_perlin.noise_0_0_1.000000.jpg) |
-| `position` *Position Operation Output* <br> `min_level` 2 <br> `max_level` 2 <br> `beta` 1.0  | ![](figures/output/operations.noise_perlin.noise_2_2_1.000000.jpg) |
-| `position` *Position Operation Output* <br> `min_level` 4 <br> `max_level` 4 <br> `beta` 1.0  | ![](figures/output/operations.noise_perlin.noise_4_4_1.000000.jpg) |
-| `position` *Position Operation Output* <br> `min_level` 0 <br> `max_level` 6 <br> `beta` 0.0  | ![](figures/output/operations.noise_beta.noise_0_6_0.000000.jpg) |
-| `position` *Position Operation Output* <br> `min_level` 0 <br> `max_level` 6 <br> `beta` 1.0  | ![](figures/output/operations.noise_beta.noise_0_6_1.000000.jpg) |
-| `position` *Position Operation Output* <br> `min_level` 0 <br> `max_level` 6 <br> `beta` 2.0  | ![](figures/output/operations.noise_beta.noise_0_6_2.000000.jpg) |
-| `position` *Position Operation Output* <br> `min_level` 0 <br> `max_level` 6 <br> `beta` -1.0  | ![](figures/output/operations.noise_beta.noise_0_6_-1.000000.jpg) |
-| `position` *Position Operation Output* <br> `min_level` 0 <br> `max_level` 6 <br> `beta` -2.0  | ![](figures/output/operations.noise_beta.noise_0_6_-2.000000.jpg) |
+**Example**
+
 
 ### Colorize
-Operation name:
+Operator name:`colorize`
 
-`colorize`
-
-Input:
- 
+**Parameters**
 - `keys` float[] *five components per key: (luminosity, r, g, b, a)*
 - `input` float
 
@@ -238,18 +222,13 @@ There have to be at least two keys.
 
 If the first key starts at a luminosity value higher that zero, all luminosity values before it map to the color (r, g, b, a) value of the first key, likewise for the last key and luminosities higher than the last keys luminosity.
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `keys` <br> 0.1, 0.5, 0.0, 0.0, 1.0,<br> 0.5, 0.25, 0.375, 0.5, 1.0, <br> 0.9, 1.0, 1.0, 1.0, 1.0 <br> `input` "boat.png"  | ![](figures/output/operations.colorize.png) |
+**Example**
+
 
 ### Grayscale Conversion
-Operation name:
+Operator name:`grayscale`
 
-`grayscale`
-
-Input:
-
+**Parameters**
 - `input` vec4
 - `weights` vec4
 
@@ -261,19 +240,14 @@ where `l_*` denotes the luminosity value from the input per channel and `w_*` th
 
 You can ignore the alpha channel by setting the weights to `(1, 1, 1, 0)`.
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `input` mandrill.png <br>  `weights` 1.0, 0.0, 0.0, 0.0 | ![](figures/output/operations.grayscale.png) |
+**Example**
+
 
 ### HSL
 
-Operation name:
+Operator name:`hsl`
 
-`hsl`
-
-Input:
-
+**Parameters**
 - `hue` float
 - `saturation` float
 - `lightness` float
@@ -282,18 +256,13 @@ Input:
 
 Allows adjustements of Hue, Saturation and Lightness to the input texture. First this note converts to HSL color space, then it applies the color correction, and finally it converts back to rgb color space. The default value for the Hue, Saturation, and Lightness inputs is 0.5. All values above that increase the respecive value, all below decrease it.
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-|  `hue` 0.25 <br> `saturation` -0.5 <br> `lightness` -0.25 <br> `input` mandrill.png | ![](figures/output/operations.hsl.png) |
+**Example**
+
 
 ### Levels
-Operation name:
+Operator name:`levels`
 
-`levels`
-
-Input:
-
+**Parameters**
 - `black_point` vec4
 - `gamma` vec4
 - `white_point` vec4
@@ -303,119 +272,81 @@ Input:
 
 This node allows to remap the tones in a texture by setting the input and output remap factors.
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-|  `black_point` 0.10, 0.10, 0.10, 0.0 <br> `gamma` 1.0, 1.0, 1.0, 1.0 <br> `white_point` 0.82, 1.000000, 0.5, 1.000000 <br> `output_from` 0.0, 0.0, 0.0, 0.0 <br> `output_to` 1.0, 1.0, 1.0, 1.0<br> `input` mandrill.png | ![](figures/output/operations.levels_1.png) |
-|  `black_point` 0.0, 0.0, 0.0, 0.0 <br> `gamma` 2.78, 2.78, 2.78, 0.5 <br> `white_point` 1.0, 1.0, 1.0, 1.0 <br> `output_from` 0.0, 0.0, 0.0, 0.0 <br> `output_to` 1.0, 1.0, 1.0, 1.0<br> `input` symmetric_gradient.png | ![](figures/output/operations.levels_2.png) |
+**Example**
+
 
 ### Uniform Color
-Operation name:
+Operator name:`uniform_color`
 
-`uniform_color`
-
-Input:
-
+**Parameters**
 - `output_color` vec4
 
-Creates a texture with a uniform color.
+Outputs a vec4 value  
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `output_color` 0.2, 1.0, 0.2, 1.0 | ![](figures/output/operations.uniform_color.png) |
+**Example**
 
 ### UVW Coordinate
 
-Operation name:
-
-`uvw_coordinate`
+Operator name:`uvw_coordinate`
 
 Maps texture UVW coordinates ([0,1]x[0,1]x[0,1]) to the output.
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| Ø | ![](figures/output/operations.uvw_coordinate.png) |
+**Example**
 
 ### Blur
 
+Operator name:`blur`
 
-Operation name:
-
-`blur`
-
-Input:
-
+**Parameters**
 - `intensity` float
 - `input` operation
 
 Performs a gaussian blur over the input image. The `intensity` parameter corresponds to the standard deviation of the gaussian blur.
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `intensity` 2.0 <br> `input` mandirll.png | ![](figures/output/operations.blur.png) |
+**Example**
+
 
 ### Normal Map
-Operation name:
-
-`normal_map`
+Operator name:`normal_map`
 
 
-Input:
-
+**Parameters**
 - `intensity` float
 - `input` operation
 
-Compute the tangent space normal map for the input's first channel which is being interpreted as a bump map.
+Compute the tangent space normal map
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `intensity` 2.0 <br> `input` wood_grains.png | ![](figures/output/operations.normal_map.png) |
+**Example**
 
 ### Sharpen
-Operation name:
+Operator name:`sharpen`
 
-`sharpen`
-
-Input:
-
+**Parameters**
 - `intensity` float
 - `input` operation
 
 Performs a sharpening operation on the input image.
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `intensity` 2.0 <br> `input` mandrill.png | ![](figures/output/operations.sharpen.png) |
+**Parameters**
 
-### Transformation
-Operation name:
 
-`transformation`
+### Transform
+Operation name:`transform`
 
-Input:
-
-- `transform_matrix` mat4
+**Parameters**
+- `translate` vec4
+- `rotate` vec4
+- `scale` vec4
 - `input` operation
 
-Allows to apply these transformations to the input texture: scale, rotate and proportion changes. (Applies a transformation matrix to the input).
+Allows to apply these transformations to the input : scale, rotate and proportion changes. (Applies a transformation matrix to the input).
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `transform_matrix` <br> 0.0, -1.0, 0.0, 0.0, <br> 1.0, 0.0, 0.0, 0.0, <br> 0.0, 0.0, 1.0, 0.0, <br> 0.33, 0.0, 0.0, 1.0 <br> `input` axis.png | ![](figures/output/operations.transformation.png) |
+**Example**
 
 ### Combine
-Operation name:
+Operator name:`combine`
 
-`combine`
-
-Input:
-
+**Parameters**
 - `red` float
 - `green` float
 - `blue` float
@@ -423,152 +354,84 @@ Input:
 
 Takes the input values and places them in the respective channels of the output.
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `red` 0.2 <br> `green` 1.0 <br> `blue` 0.2 <br> `alpha` 1.0| ![](figures/output/operations.combine.png) |
+**Example**
+
 
 ### Addition
-Operation name:
+Operator name:`add`
 
-`add`
-
-Input:
-
+**Parameters**
 - `summand_1` vec4
 - `summand_2` vec4
 
 ```output = summand_1 + summand_2```
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `summand_1` 0.3, 0.7, 0.3, 0.5 <br> `summand_2` 0.7, 0.3, 0.7, 0.5  | ![](figures/output/operations.add.png) |
+**Example**
+
 
 ### Subtraction
-Operation name:
+Operator name: `subtract`
 
-`subtract`
 
-Input:
-
+**Parameters**
 - `minuend` vec4
 - `subtrahend` vec4
 
 ```output = minuend - subtrahend```
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `minuend` 1.7, 1.3, 1.7, 0.5 <br> `subtrahend` 0.7, 0.3, 0.7, -0.5  | ![](figures/output/operations.subtract.png) |
+**Example**
+
 
 ### Multiplication
-Operation name:
+Operator name:`multiply`
 
-`multiply`
 
-Input:
-
+**Parameters**
 - `factor_1` vec4
 - `factor_2` vec4
 
 ```output = factor_1 * factor_2```
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `factor_1` 0.5, 0.5, 0.5, 0.5 <br> `factor_2` 2.0, 2.0, 2.0, 2.0  | ![](figures/output/operations.multiply.png) |
+**Example**
+
 
 ### Division
-Operation name:
+Operator name:`divide`
 
-`divide`
-
-Input:
-
+**Parameters**
 - `dividend` vec4
 - `divisor` vec4
 
 ```output = dividend / divisor```
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `dividend` 1.0, 1.0, 1.0, 1.0 <br> `divisor` 2.0, 2.0, 2.0, 1.0  | ![](figures/output/operations.divide.png) |
+**Example**
+
 
 ### Matrix Multiplication
 
-Operation name:
-`matrix_multiply`
+Operator name:`matrix_multiply`
 
-Input:
-
+**Parameters**
 - `matrix` mat4
 - `vector` vec4
 
 ``` output = matrix * vector```
 
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `matrix` <br> 0.0, -1.0, 0.0, 0.0, <br> 1.0, 0.0, 0.0, 0.0, <br> 0.0, 0.0, 1.0, 0.0, <br> 0.33, 0.0, 0.0, 1.0 <br> `vector` *Position operation output*  | ![](figures/output/operations.matrix_multiply.png) |
+**Example**
 
 ### L2 Norm
 
-Operation name:
-`l2_norm`
+Operator name:`l2_norm`
 
-Input:
-
+**Parameters**
 - `input` vec4
 
 ``` output = sqrt(dot(input, input))```
 
-#### Example
-| Parameters    | Output                    |
-| ---           | ---                       |
-| `input` *Position operation output*  | ![](figures/output/operations.l2_norm.png) |
+**Example**
 
 ## 4. Example
 
-An example for a simple OLL file that generates a noise texture can be found in the following
 
-```json
-{
-    "operations": [
-        {
-            "operation": "position",
-            "operation_marker": 0
-        },
-        {
-            "operation": "noise",
-            "operation_marker": 1,
-            "params": [
-                {
-                    "name": "min_level",
-                    "value": 0,
-                    "type": "int"
-                },
-                {
-                    "name": "max_level",
-                    "value": 10,
-                    "type": "int"
-                },
-                {
-                    "name": "position",
-                    "value": 0,
-                    "type": "operation"
-                }
-            ]
-        }
-    ],
-    "outputs": [
-        {
-            "operation": 1,
-            "name": "base_color"
-        }
-    ]
-}
-```
 
