@@ -2,25 +2,51 @@ Copyright © Inter IKEA Systems B.V. 2021
 
 # Operator List - Procedural Material
 
-## 1. Introduction
+## Introduction
 
 The purpose of `procedural image` is to provide a framework that enables generation of procedurally generated images.  
 One goal is to be able to use these images as texture sources in 3D content (computer generated images), both as a source for very high quality production (raytraced) images and also as a source for realtime 3D model textures.  
 It shall be possible to generate source images on target devices in runtime without prohibitive time consumption.  
-Times for generation of images shall typically be in the region of the time it takes to decode png/jpeg images.  
+Times for generation of images shall typically be in the region of the time it takes to decode png/jpeg images, obviously this depends on the complexity of the procedural recipe.    
 
 The core of `procedural image` is made up by the operator list.  
 This list is the set of commands or operators that make up a recipe for generating source images.  
 
-The operator list is a set of operators that are executed in sequence, each having one or more inputs and one output.  
+The operator list, recipe, is a set of operators that are executed in sequence, each having one or more inputs and one output.  
 
 Input and output is made up of 4 component vectors, where the fourth component is the magnitude.  
-Output from an operator shall be in the region of [-1.0 - 1.0] for the first 3 components (R,G,B)  
+
+
+## Generation
+
+Generation of a procedural image from a recipe is done by executing the operators in sequence, the last produced value is stored in the output buffer.  
+
+This is the output from a blend operator, blending two inputs - foreground and background.  
+As you can see this is not much of a procedural image - simply one color  
+
+![image](https://github.com/idlabs/procedural-image/assets/3063192/80dbc157-0592-4b20-851c-c3b272350285)
+
+This is the output when attaching position as input to the blend operator.  
+
+![image](https://github.com/idlabs/procedural-image/assets/3063192/fb722064-b611-4fc6-b616-263a8681eae0)
+
+Now there are different colored pixels in the image.  
+This is to show that using (world) position as input to operators is one way of generating a changing output.  
+
+**World position**
+
+The world position will change based on which pixel (x, y) that is generated.  
+By default the world position will go from [-1.0,-1.0] to [1.0, 1.0]  
+These values are chosen to keep position values in a range where precision is high, 7 decimals when using single precision floating point (32 bit floats)  
+Many operators do not 'scale' well when using integers, if needed there is an option to change the world position in the asset.  
+For instance making the world position go from 0.0 - 100.0 if wanted.  
+
+![image](https://github.com/idlabs/procedural-image/assets/3063192/29fe5796-23cb-46da-afd9-a82a8ebd25ab)
 
 
 
 
-## 2. Syntax
+## Syntax
 
 OLL is based on JSON with two top level objects, _**operators**_ and _**outputs**_.
 
@@ -83,7 +109,7 @@ The key defines the `output name` and the value references the operation that sh
   }
 ```
 
-## 3. Operators
+## Operators
 
 **Blend**
 Operator Name: `blend`
