@@ -24,13 +24,12 @@ Generation of a procedural image from a recipe is done by executing the operator
 This is the output from a blend operator, blending two inputs - foreground and background.  
 As you can see this is not much of a procedural image - simply one color  
 
-![image](https://github.com/idlabs/procedural-image/assets/3063192/80dbc157-0592-4b20-851c-c3b272350285)
+| Blend operator | Position input to blend |
+:-------:|:------:
+![image](https://github.com/idlabs/procedural-image/assets/3063192/80dbc157-0592-4b20-851c-c3b272350285) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/fb722064-b611-4fc6-b616-263a8681eae0)
 
-This is the output when attaching position as input to the blend operator.  
 
-![image](https://github.com/idlabs/procedural-image/assets/3063192/fb722064-b611-4fc6-b616-263a8681eae0)
-
-Now there are different colored pixels in the image.  
+With position input to blend there are different colored pixels in the image - much more interesting than a one colored image :-)    
 This is to show that using (world) position as input to operators is one way of generating a changing output.  
 
 **World position**
@@ -39,9 +38,11 @@ The world position will change based on which pixel (x, y) that is generated.
 By default the world position will go from [-1.0,-1.0] to [1.0, 1.0]  
 These values are chosen to keep position values in a range where precision is high, 7 decimals when using single precision floating point (32 bit floats)  
 Many operators do not 'scale' well when using integers, if needed there is an option to change the world position in the asset.  
-For instance making the world position go from 0.0 - 100.0 if wanted.  
+For instance making the world position go from [-20.0, -20.0] to [20.0, 20.0] if wanted.  
 
-![image](https://github.com/idlabs/procedural-image/assets/3063192/29fe5796-23cb-46da-afd9-a82a8ebd25ab)
+| Voronoi, position input | Voronoi, scaled position as input |
+:-------:|:------:
+![image](https://github.com/idlabs/procedural-image/assets/3063192/29fe5796-23cb-46da-afd9-a82a8ebd25ab) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/a156b780-c987-4d3b-ac76-dd3b89da6408)
 
 
 
