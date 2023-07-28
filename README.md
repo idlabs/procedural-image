@@ -129,9 +129,40 @@ A vec4 containing the cell center position in the first three components, in the
 
 
 **Example**
+
+Below examples are generated with the same randomness, showing the effects of transforming the input position.  
+
 | Generation from position | Offset position | Scaled position | Rotated (45°) position |
 :-----:|:-----:|:-----:|:-----:
 ![image](https://github.com/idlabs/procedural-image/assets/3063192/9a11e8f2-40d0-421a-b475-22b913286875) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/2c706cdf-51d1-4ce0-9136-00c0c206c9a0) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/9e45bae8-977c-40db-af49-42f780412be1) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/1afc312a-304e-42c8-bbed-7e404ad7c257)
+
+
+### Noise
+Operator name:`noise`
+
+**Parameters**
+- `input` vec3
+- `min_level` int
+- `max_level` int
+- `beta` float
+
+Creates a brownian noise that consists of multiple octaves of noise laid over each other with a signal intensity falloff for lower amplitudes.
+
+`min_level` and `max_level` specify the range of fractal levels. You can limit the noise to a single level by setting the `min_level` and `max_level` to the same value, which will result in white noise.
+
+`beta` is used to specify the [color of the noise](https://en.wikipedia.org/wiki/Colors_of_noise).
+
+**Example**
+
+Below examples are generated with min_level = 0, max_level = 1, beta = 0.0  
+This is to show the effects of transforming the input position.  
+
+| Generation from position | Offset position | Scaled position | Rotated (45°) position |
+:-----:|:-----:|:-----:|:-----:
+![image](https://github.com/idlabs/procedural-image/assets/3063192/9cca4c28-d5a7-4963-8460-dea06f5a61f8) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/caf31e14-1413-4dc0-8bbe-2d015d3ebe68) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/ed9fd21a-e367-4d9f-bac4-5c03173f36c5) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/f613806c-cf58-46c9-96cd-1af102099863)
+
+
+
 
 
 
@@ -221,25 +252,6 @@ This node allows to precisely map input color values to output values. The trans
 
 Each channel `red`, `green` and `blue`'s bezier curve is specified by an array of control points where four control points form a bezier segment. 
 
-
-**Example**
-
-
-
-### Noise
-Operator name:`noise`
-
-**Parameters**
-- `input` vec3
-- `min_level` int
-- `max_level` int
-- `beta` float
-
-Creates a brownian noise that consists of multiple octaves of noise laid over each other with a signal intensity falloff for lower amplitudes.
-
-`min_level` and `max_level` specify the range of fractal levels. You can limit the noise to a single level by setting the `min_level` and `max_level` to the same value, which will result in white noise.
-
-`beta` is used to specify the [color of the noise](https://en.wikipedia.org/wiki/Colors_of_noise).
 
 **Example**
 
