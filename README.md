@@ -110,7 +110,31 @@ The key defines the `output name` and the value references the operation that sh
   }
 ```
 
-## Operators
+# Operators
+
+## Generator Operators
+
+These operators can be seen as the base of procedurally generated images, they are the operators that produce an output based on input value.  
+
+### Voronoi
+
+Operator name: `voronoi`
+
+**parameters**
+- `input` vec3
+- `randomness` float
+
+Output:
+A vec4 containing the cell center position in the first three components, in the range [-1.0 - 1.0], and the  voronoi distance value in the last component.  
+
+
+**Example**
+| Generation from position | Offset position | Scaled position | Rotated (45°) position |
+:-----:|:-----:|:-----:|:-----:
+![image](https://github.com/idlabs/procedural-image/assets/3063192/9a11e8f2-40d0-421a-b475-22b913286875) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/2c706cdf-51d1-4ce0-9136-00c0c206c9a0) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/9e45bae8-977c-40db-af49-42f780412be1) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/1afc312a-304e-42c8-bbed-7e404ad7c257)
+
+
+
 
 **Blend**
 Operator Name: `blend`
@@ -151,19 +175,6 @@ Output contains the normalized world position of the fragment in the range [-1.0
 
 
 
-### Voronoi
-
-Operator name: `voronoi`
-
-**parameters**
-- `input` vec3
-- `randomness` float
-
-Output:
-A vec4 containing the cell center position in the first three components, in the range [-1.0 - 1.0], and the  voronoi distance value in the last component.  
-
-
-**Example**
 
 
 ### Sawtooth Wave
