@@ -189,9 +189,46 @@ Below examples are generated with an asset that specifies world coordinates from
 ![image](https://github.com/idlabs/procedural-image/assets/3063192/e2146074-6b86-4cc1-8ada-097906748a57) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/9b7f1ca5-94fd-454d-bd80-5ac8764d6e95) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/b4e35906-9661-41aa-ab4d-e5261f5ca5f4) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/ae52a435-75e8-4609-b242-84cc31f430ba)
 
 
+### Position
+
+Operator name: `position`
+
+Output contains the normalized world position of the fragment, default is in the range [-1.0 - 1.0], this can be changed in the asset.  
+
+**Example**
+
+Below is outputs with different world scale and offsets, this controls what the range is for the position operator.  
+
+| Position [-1.0 - 1.0] | Position [0.0 - 1.0] |
+:-------:|:------:
+![image](https://github.com/idlabs/procedural-image/assets/3063192/4867cfb6-1920-41d6-bd08-9503f87752af) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/1cca050d-99a9-4792-b071-c3681e666f90)
 
 
+### Sawtooth Wave
 
+Operator name: `sawtooth_wave`
+
+**parameters**
+- `input` vec3
+
+Applies a sawtooth wave function to each channel of the input vector.
+
+**Example**
+
+### Levels
+Operator name:`levels`
+
+**Parameters**
+- `black_point` vec4
+- `gamma` vec4
+- `white_point` vec4
+- `output_from` vec4
+- `output_to` vec4
+- `input` vec4
+
+This node allows to remap the tones in a texture by setting the input and output remap factors.
+
+**Example**
 
 
 **Blend**
@@ -222,29 +259,19 @@ All blend operations blend the result `r` together with the background layer usi
 **Example**
 
 
-### Position
-
-Operator name: `position`
-
-Output contains the normalized world position of the fragment in the range [-1.0 - 1.0]  
-
-**Example**
 
 
+### Uniform Color
+Operator name:`uniform_color`
 
+**Parameters**
+- `output_color` vec4
 
-
-
-### Sawtooth Wave
-
-Operator name: `sawtooth_wave`
-
-**parameters**
-- `input` vec3
-
-Applies a sawtooth wave function to each channel of the input vector.
+Outputs a vec4 value  
 
 **Example**
+
+
 
 
 ### Linear To Srgb
@@ -319,32 +346,6 @@ Allows adjustements of Hue, Saturation and Lightness to the input texture. First
 **Example**
 
 
-### Levels
-Operator name:`levels`
-
-**Parameters**
-- `black_point` vec4
-- `gamma` vec4
-- `white_point` vec4
-- `output_from` vec4
-- `output_to` vec4
-- `input` vec4
-
-This node allows to remap the tones in a texture by setting the input and output remap factors.
-
-**Example**
-
-
-### Uniform Color
-Operator name:`uniform_color`
-
-**Parameters**
-- `output_color` vec4
-
-Outputs a vec4 value  
-
-**Example**
-
 ### UVW Coordinate
 
 Operator name:`uvw_coordinate`
@@ -389,20 +390,6 @@ Performs a sharpening operation on the input image.
 
 **Parameters**
 
-
-### Transform
-Operation name:`transform`
-
-**Parameters**
-- `translate` vec4
-- `rotate` vec4
-- `scale` vec4
-- `input` operation
-
-Allows to apply these transformations to the input : scale, rotate and proportion changes. (Applies a transformation matrix to the input).
-
-**Example**
-
 ### Combine
 Operator name:`combine`
 
@@ -416,69 +403,6 @@ Takes the input values and places them in the respective channels of the output.
 
 **Example**
 
-
-### Addition
-Operator name:`add`
-
-**Parameters**
-- `summand_1` vec4
-- `summand_2` vec4
-
-```output = summand_1 + summand_2```
-
-**Example**
-
-
-### Subtraction
-Operator name: `subtract`
-
-
-**Parameters**
-- `minuend` vec4
-- `subtrahend` vec4
-
-```output = minuend - subtrahend```
-
-**Example**
-
-
-### Multiplication
-Operator name:`multiply`
-
-
-**Parameters**
-- `factor_1` vec4
-- `factor_2` vec4
-
-```output = factor_1 * factor_2```
-
-**Example**
-
-
-### Division
-Operator name:`divide`
-
-**Parameters**
-- `dividend` vec4
-- `divisor` vec4
-
-```output = dividend / divisor```
-
-**Example**
-
-
-### Matrix Multiplication
-
-Operator name:`matrix_multiply`
-
-**Parameters**
-- `matrix` mat4
-- `vector` vec4
-
-``` output = matrix * vector```
-
-
-**Example**
 
 ### L2 Norm
 
