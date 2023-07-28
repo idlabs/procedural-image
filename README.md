@@ -131,6 +131,7 @@ A vec4 containing the cell center position in the first three components, in the
 **Example**
 
 Below examples are generated with the same randomness, showing the effects of transforming the input position.  
+The asset specifies world coordinates from -1.0 to 1.0  
 
 | Generation from position | Offset position | Scaled position | Rotated (45°) position |
 :-----:|:-----:|:-----:|:-----:
@@ -156,10 +157,36 @@ Creates a brownian noise that consists of multiple octaves of noise laid over ea
 
 Below examples are generated with min_level = 0, max_level = 1, beta = 0.0  
 This is to show the effects of transforming the input position.  
+The asset specifies world coordinates from -1.0 to 1.0  
 
 | Generation from position | Offset position | Scaled position | Rotated (45°) position |
 :-----:|:-----:|:-----:|:-----:
 ![image](https://github.com/idlabs/procedural-image/assets/3063192/9cca4c28-d5a7-4963-8460-dea06f5a61f8) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/caf31e14-1413-4dc0-8bbe-2d015d3ebe68) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/ed9fd21a-e367-4d9f-bac4-5c03173f36c5) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/f613806c-cf58-46c9-96cd-1af102099863)
+
+
+
+### Curve
+Operator name:`curve`
+
+**parameters**
+- `red` float[] *two components per control point: (position, luminosity)*
+- `green` float[] *two components per control point: (position, luminosity)*
+- `blue` float[] *two components per control point: (position, luminosity)*
+- `alpha` float[] *two components per control point: (position, alpha value)*
+- `input` vec4
+
+This node allows to precisely map input color values to output values. The transfer function is given by a set of bezier curves.
+
+Each channel `red`, `green` and `blue`'s bezier curve is specified by an array of control points where four control points form a bezier segment. 
+
+
+**Example**
+
+Below examples are generated with an asset that specifies world coordinates from 0.0 - 1.0 (this is why the curve axis of rotation is not in center of screen)    
+
+| Generation from position | Offset position | Scaled position | Rotated (45°) position |
+:-----:|:-----:|:-----:|:-----:
+![image](https://github.com/idlabs/procedural-image/assets/3063192/e2146074-6b86-4cc1-8ada-097906748a57) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/9b7f1ca5-94fd-454d-bd80-5ac8764d6e95) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/b4e35906-9661-41aa-ab4d-e5261f5ca5f4) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/ae52a435-75e8-4609-b242-84cc31f430ba)
 
 
 
@@ -237,23 +264,6 @@ Operator name:`srgb_to_linear`
 - `input` vec4
 
 Converts [sRGB color inputs to linear](https://en.wikipedia.org/wiki/SRGB#From_sRGB_to_CIE_XYZ)
-
-### Curve
-Operator name:`curve`
-
-**parameters**
-- `red` float[] *two components per control point: (position, luminosity)*
-- `green` float[] *two components per control point: (position, luminosity)*
-- `blue` float[] *two components per control point: (position, luminosity)*
-- `alpha` float[] *two components per control point: (position, alpha value)*
-- `input` vec4
-
-This node allows to precisely map input color values to output values. The transfer function is given by a set of bezier curves.
-
-Each channel `red`, `green` and `blue`'s bezier curve is specified by an array of control points where four control points form a bezier segment. 
-
-
-**Example**
 
 
 ### Colorize
