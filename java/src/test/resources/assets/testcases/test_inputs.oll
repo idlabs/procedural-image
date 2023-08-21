@@ -1,0 +1,81 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "position"
+        },
+        "add": {
+          "operation": "add",
+          "parameters": {
+            "summand_1": [ 0.1, 0.2, 0.3, 0.0],
+            "summand_2": {"$ref": "#/operations/n1"}
+          }
+        },
+        "references": {
+          "operation": "add",
+          "parameters": {
+            "summand_1": {"$ref": "#/operations/addinput"},
+            "summand_2": {"$ref": "#/operations/n1"}
+          }
+        },
+        "addinput": {
+          "operation": "add",
+          "parameters": {
+            "summand_1": {"$ref": "#/operations/n1"},
+            "summand_2": {"$ref": "#/operations/multiplyinput"}
+          }
+        },
+        "divideinput": {
+          "operation": "divide",
+          "parameters": {
+            "dividend": {"$ref": "#/operations/n1"},
+            "divisor": {"$ref": "#/operations/n1"}
+          }
+        },
+        "multiplyinput": {
+          "operation": "multiply",
+          "parameters": {
+            "factor_1": {"$ref": "#/operations/n1"},
+            "factor_2": {"$ref": "#/operations/divideinput"}
+          }
+        },
+        "cyclic": {
+          "operation": "subtract",
+          "parameters": {
+            "minuend": {"$ref": "#/operations/cyclicref1"},
+            "subtrahend": {"$ref": "#/operations/cyclicref1"}
+          }
+        },
+        "cyclicref1": {
+          "operation": "add",
+          "parameters": {
+            "summand_2": {"$ref": "#/operations/cyclic"},
+            "summand_1": {"$ref": "#/operations/cyclic"}
+          }
+        },
+        "inputwithtrs_voronoi": {
+          "operation": "voronoi",
+          "parameters": {
+            "randomness": 0.123456,
+            "position": {"$ref": "#/operations/n1"},
+            "input_offset": [0.4,0.5,0.6],
+            "input_rotate": [0.1,0.2,0.3],
+            "input_scale": [0.7,0.8,0.9]
+          }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}

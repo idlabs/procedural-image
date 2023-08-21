@@ -36,11 +36,21 @@ public class IndexParameter extends Parameter {
     }
 
     /**
+     * Returns true if the index opcode is output, ie the highest bit is set.
+     * 
+     * @param opCode
+     * @return
+     */
+    public static boolean isOutput(short opCode) {
+        return (opCode & 0x8000) == 0x08000;
+    }
+
+    /**
      * Returns the index as an opcode
      * 
      * @return
      */
-    protected Short getOpcode() {
+    protected short getOpcode() {
         return isOutput() ? (short) (index | 0x8000) : (short) index;
     }
 

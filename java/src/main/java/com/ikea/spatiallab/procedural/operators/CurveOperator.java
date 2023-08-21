@@ -9,26 +9,26 @@ package com.ikea.spatiallab.procedural.operators;
 public class CurveOperator extends OperatorImplementation {
 
     private enum CurveInput implements OpcodeInput {
-        input((byte) 0),
-        red((byte) 1),
-        green((byte) 2),
-        blue((byte) 3),
-        alpha((byte) 4);
+        input(),
+        red(),
+        green(),
+        blue(),
+        alpha();
 
-        private final byte index;
+        CurveInput(float... minMax) {
+            this.minMax = minMax;
+        }
 
-        CurveInput(byte index) {
-            this.index = index;
+        private final float[] minMax;
+
+        @Override
+        public float[] getMinMax() {
+            return minMax;
         }
 
         @Override
         public String getName() {
             return name();
-        }
-
-        @Override
-        public byte getIndex() {
-            return index;
         }
     }
 
@@ -41,11 +41,11 @@ public class CurveOperator extends OperatorImplementation {
         FloatParameter input = getFloatParameter(CurveInput.red.name());
         // Store number of controlpoints
         // TODO - makes sure that data in red,green,blue,alpha matches
-        opCodes.addOpcode(getOperator().opCode, (byte) (input.getNumberOfValues() / 2));
+        opCodes.addOpcode(getKey(), getOperator().opCode, (byte) (input.getNumberOfValues() / 2));
     }
 
     @Override
-    protected OpcodeInput[] getInputs() {
+    protected OpcodeInput[] internalGetOperatorInputs() {
         return CurveInput.values();
     }
 

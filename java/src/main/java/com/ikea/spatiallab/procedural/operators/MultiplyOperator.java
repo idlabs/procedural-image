@@ -9,13 +9,18 @@ package com.ikea.spatiallab.procedural.operators;
 public class MultiplyOperator extends OperatorImplementation {
 
     private enum MultiplyInput implements OpcodeInput {
-        factor_1((byte) 0),
-        factor_2((byte) 1);
+        factor_1(),
+        factor_2();
 
-        private final byte index;
+        MultiplyInput(float... minMax) {
+            this.minMax = minMax;
+        }
 
-        MultiplyInput(byte index) {
-            this.index = index;
+        private final float[] minMax;
+
+        @Override
+        public float[] getMinMax() {
+            return minMax;
         }
 
         @Override
@@ -23,10 +28,6 @@ public class MultiplyOperator extends OperatorImplementation {
             return name();
         }
 
-        @Override
-        public byte getIndex() {
-            return index;
-        }
     }
 
     public MultiplyOperator(Operator operator) {
@@ -35,11 +36,11 @@ public class MultiplyOperator extends OperatorImplementation {
 
     @Override
     protected void addOpcode(OpcodeData opCodes) {
-        opCodes.addOpcode(getOperator().opCode);
+        opCodes.addOpcode(getKey(), getOperator().opCode);
     }
 
     @Override
-    protected OpcodeInput[] getInputs() {
+    protected OpcodeInput[] internalGetOperatorInputs() {
         return MultiplyInput.values();
     }
 

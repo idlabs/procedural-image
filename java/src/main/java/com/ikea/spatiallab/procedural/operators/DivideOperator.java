@@ -1,17 +1,12 @@
-/**
- * Copyright Ikea Communications AB
- */
 package com.ikea.spatiallab.procedural.operators;
 
-/**
- *
- */
-public class UniformColorOperator extends OperatorImplementation {
+public class DivideOperator extends OperatorImplementation {
 
-    private enum UniformColorInput implements OpcodeInput {
-        output_color();
+    private enum DivideInput implements OpcodeInput {
+        dividend(),
+        divisor();
 
-        UniformColorInput(float... minMax) {
+        DivideInput(float... minMax) {
             this.minMax = minMax;
         }
 
@@ -26,9 +21,10 @@ public class UniformColorOperator extends OperatorImplementation {
         public String getName() {
             return name();
         }
+
     }
 
-    protected UniformColorOperator(Operator source) {
+    protected DivideOperator(Operator source) {
         super(source);
     }
 
@@ -39,7 +35,7 @@ public class UniformColorOperator extends OperatorImplementation {
 
     @Override
     protected OpcodeInput[] internalGetOperatorInputs() {
-        return UniformColorInput.values();
+        return DivideInput.values();
     }
 
 }

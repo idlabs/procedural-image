@@ -3,6 +3,7 @@
  */
 package com.ikea.spatiallab.procedural.operators;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,17 +15,23 @@ import com.ikea.digitallabs.dela.ErrorMessage;
 import com.ikea.spatiallab.procedural.operators.IndexParameter.IndexType;
 import com.ikea.spatiallab.procedural.operators.OperatorImplementation.FloatInputData;
 import com.ikea.spatiallab.procedural.operators.OperatorImplementation.InputData;
+import com.ikea.spatiallab.procedural.operators.OperatorImplementation.OpcodeInput;
 import com.ikea.spatiallab.procedural.operators.ProceduralImage.Target;
 
 /**
  * Resolves an operatorlist with references into a queue/list that can be traversed
  */
-public class OperatorListResolver {
+public class OperatorRecipe {
 
     private final LinkedList<OperatorData> list = new LinkedList<OperatorData>();
     private HashMap<Integer, IndexParameter> destinations = new HashMap<Integer, IndexParameter>();
+    private float[] offset;
+    private float[] scale;
+    private float zoom = 1;
 
-    OperatorListResolver() {
+    OperatorRecipe(float[] offset, float[] scale) {
+        this.offset = offset;
+        this.scale = scale;
     }
 
     /**
@@ -32,12 +39,16 @@ public class OperatorListResolver {
      */
     public static class OperatorData {
 
+        private static int nextId = 0x0800;
+
         private final OperatorImplementation operator;
         private HashMap<String, IndexParameter> indexes = new HashMap<String, IndexParameter>();
         private IndexParameter destination;
+        public final int id;
 
         protected OperatorData(OperatorImplementation operator) {
             this.operator = operator;
+            this.id = nextId++;
         }
 
         /**
@@ -67,7 +78,7 @@ public class OperatorListResolver {
          * @param key
          * @return
          */
-        protected IndexParameter getInputIndex(String key) {
+        public IndexParameter getInputIndex(String key) {
             return indexes.get(key);
         }
 
@@ -83,19 +94,25 @@ public class OperatorListResolver {
 
         /**
          * 
-         * @return
-         */
-        public InputData<?>[] getInputData() {
-            return operator.getInputData(indexes);
-        }
-
-        /**
-         * 
          * @param index
          * @return
          */
         protected InputData<?> getInputData(IndexParameter index) {
             return operator.getInputData(index.key, indexes);
+        }
+
+        /**
+         * Returns the inputdata for the opcode input
+         * 
+         * @param input
+         * @return
+         */
+        public InputData<?> getInputData(OpcodeInput input) {
+            return operator.getInputData(input.getName(), indexes);
+        }
+
+        public InputData<?> getInputData(String parameterName) {
+            return operator.getInputData(parameterName, indexes);
         }
 
         /**
@@ -125,20 +142,12 @@ public class OperatorListResolver {
         }
 
         /**
-         * Returns the size of input data, in bytes - this will only count input data that is included,
-         * not referenced outputs.
+         * Returns the min and max value for the parameter
          * 
          * @return
          */
-        protected int getInputSize() {
-            int inputSize = 0;
-            InputData<?>[] inputs = getInputData();
-            for (InputData<?> input : inputs) {
-                if (input instanceof FloatInputData) {
-                    inputSize += ((FloatInputData) input).getByteSize();
-                }
-            }
-            return inputSize;
+        public float[] getMinMax() {
+            return null;
         }
 
     }
@@ -171,10 +180,11 @@ public class OperatorListResolver {
     }
 
     /**
+     * Returns the sorted list of operator data
      * 
      * @return
      */
-    List<OperatorData> getList() {
+    public List<OperatorData> getList() {
         return list;
     }
 
@@ -192,7 +202,7 @@ public class OperatorListResolver {
      * @param index
      * @return
      */
-    protected OperatorData getOperatorData(int index) {
+    public OperatorData getOperatorData(int index) {
         return index >= 0 && index < list.size() ? list.get(index) : null;
     }
 
@@ -235,11 +245,13 @@ public class OperatorListResolver {
             for (String key : keys) {
                 IndexParameter index = od.getInputIndex(key);
                 InputData<?> input = od.getInputData(index);
-                if (input == null) {
-                    throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "Input is null");
-                }
-                if (index.type == IndexType.INDEX_INPUT_FLOAT || index.type == IndexType.INDEX_INPUT_ARRAY) {
-                    inputsize += input.getByteSize();
+                if (input == null && !od.getOperator().allowNullInput(index)) {
+                    throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "Input is null for " + od
+                            .getOperator().getKey() + ", " + key);
+                } else {
+                    if (index.type == IndexType.INDEX_INPUT_FLOAT || index.type == IndexType.INDEX_INPUT_ARRAY) {
+                        inputsize += input.getByteSize();
+                    }
                 }
             }
         }
@@ -272,34 +284,49 @@ public class OperatorListResolver {
      * 
      * @param data
      */
-    protected void validateInputs(OperatorData data) {
+    protected void validateInputs(OperatorData data, ProceduralImage pi) {
         Set<String> keySet = data.operator.getParameterKeySet();
         for (String key : keySet) {
             Parameter param = data.operator.getParameter(key);
             if (param instanceof Reference) {
                 IndexParameter index = data.getInputIndex(key);
                 if (index == null) {
-                    throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "No index for key: " + key);
-                }
-                // Need to find matching input in list.
-                int listIndex = list.indexOf(data);
-                if (listIndex == Constants.NO_VALUE) {
-                    throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "Data not in list");
-                }
-                if (listIndex == 0) {
-                    throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message
-                            + "Only last data item in list");
-                }
-                boolean found = false;
-                for (int i = listIndex - 1; i >= 0; i--) {
-                    if (list.get(i).getDestination().index == index.index) {
-                        found = true;
-                        break;
+                    if (param instanceof Reference) {
+                        // Means that operator is referencing an operator that has not been resolved yet.
+                        OperatorImplementation ref = pi.getOperator((Reference) param);
+                        if (ref == null) {
+                            throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "No ref for key: "
+                                    + key
+                                    + " in operator " + data.operator.getOperator());
+                        }
+                    } else {
+                        throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "No data for " + key
+                                + " in operator " + data.operator.getOperator());
                     }
-                }
-                if (!found) {
-                    throw new IllegalArgumentException(ErrorMessage.INVALID_STATE.message
-                            + "Input reference not found in list");
+                } else {
+                    IndexParameter link = pi.getOutputLink(data.operator.getKey());
+                    if (link == null) {
+                        // Need to find matching input in list.
+                        int listIndex = list.indexOf(data);
+                        if (listIndex == Constants.NO_VALUE) {
+                            throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "Data not in list");
+                        }
+                        if (listIndex == 0) {
+                            throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message
+                                    + "Only last data item in list");
+                        }
+                        boolean found = false;
+                        for (int i = listIndex - 1; i >= 0; i--) {
+                            if (list.get(i).getDestination().index == index.index) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            throw new IllegalArgumentException(ErrorMessage.INVALID_STATE.message
+                                    + "Input reference not found in list");
+                        }
+                    }
                 }
             }
         }
@@ -309,8 +336,16 @@ public class OperatorListResolver {
      * 
      * @param source
      */
-    protected void add(OperatorListResolver source) {
+    protected void add(OperatorRecipe source) {
         list.addAll(0, source.getList());
+    }
+
+    /**
+     * 
+     * @param source
+     */
+    protected void addLast(OperatorRecipe source) {
+        list.addAll(list.size(), source.getList());
     }
 
     /**
@@ -318,13 +353,50 @@ public class OperatorListResolver {
      * 
      * @return
      */
-    protected OperatorData getOperatorByKey(String key) {
+    public OperatorData getOperatorByKey(String key) {
         for (int i = list.size() - 1; i >= 0; i--) {
             if (list.get(i).operator.getKey().contentEquals(key)) {
                 return list.get(i);
             }
         }
         return null;
+    }
+
+    /**
+     * Returns an array with opcodes that are using the 'key' opcode as input, or null if none
+     * 
+     * @param key
+     * @param boolean true to include dependencies in search
+     * @return
+     */
+    public OperatorData[] getOpcodesUsingOutput(String key, boolean includeDependencies) {
+        ArrayList<OperatorData> result = new ArrayList<OperatorData>();
+        ArrayList<String> keyList = new ArrayList<String>();
+        keyList.add(key);
+        for (OperatorData opData : list) {
+            OperatorData match = null;
+            for (String keyStr : keyList) {
+                Set<String> parameters = opData.getOperator().getParameterKeySet();
+                for (String p : parameters) {
+                    Parameter param = opData.getOperator().getParameter(p);
+                    if (param instanceof Reference) {
+                        String name = ((Reference) param).getOperatorReference();
+                        if (keyStr.contentEquals(name)) {
+                            result.add(opData);
+                            match = opData;
+                            break;
+                        }
+                    }
+                }
+                if (match != null) {
+                    break;
+                }
+            }
+            if (match != null && includeDependencies) {
+                keyList.add(match.getOperator().getKey());
+            }
+        }
+        return result.size() > 0 ? result.toArray(new OperatorData[0]) : null;
     }
 
     /**
@@ -339,7 +411,34 @@ public class OperatorListResolver {
         if (!opCodes.validate()) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "Opcode data is invalid");
         }
+        opCodes.getOpcodeBuffer().position(0);
         return opCodes;
+    }
+
+    public void setZoom(float zoomFactor) {
+        this.zoom = zoomFactor;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public float[] getOffset() {
+        float deltaX = 1f * scale[0];
+        float midX = offset[0] + (deltaX / 2);
+        float deltaY = 1f * scale[1];
+        float midY = offset[1] + (deltaY / 2);
+        float deltaZ = 1f * scale[2];
+        float midZ = offset[2] + (deltaZ / 2);
+        return new float[] { midX - (deltaX / zoom) / 2, midY - (deltaY / zoom) / 2, midZ - (deltaZ / zoom) / 2 };
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public float[] getScale() {
+        return new float[] { scale[0] / zoom, scale[1] / zoom, scale[2] / zoom };
     }
 
 }

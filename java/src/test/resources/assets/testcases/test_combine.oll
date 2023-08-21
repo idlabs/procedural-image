@@ -1,0 +1,55 @@
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "operations": {
+        "n1": {
+          "operation": "combine",
+          "parameters": {
+            "red": 0.3,
+            "green": 0.4,
+            "blue": 0.5,
+            "alpha": 0.0
+          }
+        },
+        "references": {
+          "operation": "combine",
+          "parameters": {
+            "red": { "$ref": "#/operations/red" },
+            "green": { "$ref": "#/operations/green" },
+            "blue": { "$ref": "#/operations/blue" },
+            "alpha": 0.0
+          }
+        },
+        "red": {
+          "operation": "uniform_color",
+          "parameters": {
+            "output_color": [0.2,1,1,1]
+          }
+        },
+        "blue": {
+          "operation": "uniform_color",
+          "parameters": {
+            "output_color": [0.2,1,1,1]
+          }
+        },
+        "green": {
+          "operation": "uniform_color",
+          "parameters": {
+            "output_color": [0.2,1,1,1]
+          }
+        }
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/n1"
+        },
+        "roughness": {
+            "$ref": "#/operations/n1"
+        },
+        "normal": {
+            "$ref": "#/operations/n1"
+        }
+    }
+}

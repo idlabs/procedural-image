@@ -1,17 +1,14 @@
-/**
- * Copyright Ikea Communications AB
- */
 package com.ikea.spatiallab.procedural.operators;
 
-/**
- *
- */
-public class UniformColorOperator extends OperatorImplementation {
+public class TransformTRSOperator extends OperatorImplementation {
 
-    private enum UniformColorInput implements OpcodeInput {
-        output_color();
+    private enum TransformTRSInput implements OpcodeInput {
+        translation(),
+        rotation(),
+        scale(),
+        input();
 
-        UniformColorInput(float... minMax) {
+        TransformTRSInput(float... minMax) {
             this.minMax = minMax;
         }
 
@@ -28,7 +25,7 @@ public class UniformColorOperator extends OperatorImplementation {
         }
     }
 
-    protected UniformColorOperator(Operator source) {
+    protected TransformTRSOperator(Operator source) {
         super(source);
     }
 
@@ -39,7 +36,7 @@ public class UniformColorOperator extends OperatorImplementation {
 
     @Override
     protected OpcodeInput[] internalGetOperatorInputs() {
-        return UniformColorInput.values();
+        return TransformTRSInput.values();
     }
 
 }

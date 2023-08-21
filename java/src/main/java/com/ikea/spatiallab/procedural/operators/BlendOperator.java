@@ -26,24 +26,24 @@ public class BlendOperator extends OperatorImplementation {
     public static final String BLENDMODE = "blend_mode";
 
     private enum BlendInput implements OpcodeInput {
-        foreground((byte) 0),
-        background((byte) 1),
-        opacity((byte) 2);
+        foreground(),
+        background(),
+        opacity(0f, 1f);
 
-        private final byte index;
+        BlendInput(float... minMax) {
+            this.minMax = minMax;
+        }
 
-        BlendInput(byte index) {
-            this.index = index;
+        private final float[] minMax;
+
+        @Override
+        public float[] getMinMax() {
+            return minMax;
         }
 
         @Override
         public String getName() {
             return name();
-        }
-
-        @Override
-        public byte getIndex() {
-            return index;
         }
     }
 
@@ -88,11 +88,11 @@ public class BlendOperator extends OperatorImplementation {
 
     @Override
     protected void addOpcode(OpcodeData opCodes) {
-        opCodes.addOpcode(getOperator().opCode, getBlendMode().value);
+        opCodes.addOpcode(getKey(), getOperator().opCode, getBlendMode().value);
     }
 
     @Override
-    protected OpcodeInput[] getInputs() {
+    protected OpcodeInput[] internalGetOperatorInputs() {
         return BlendInput.values();
     }
 

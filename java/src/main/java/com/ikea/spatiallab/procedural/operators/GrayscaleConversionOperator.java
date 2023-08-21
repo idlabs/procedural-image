@@ -9,13 +9,18 @@ package com.ikea.spatiallab.procedural.operators;
 public class GrayscaleConversionOperator extends OperatorImplementation {
 
     private enum GrayscaleConversionInput implements OpcodeInput {
-        input((byte) 0),
-        weights((byte) 1);
+        input(),
+        weights(0f, 1f);
 
-        private final byte index;
+        GrayscaleConversionInput(float... minMax) {
+            this.minMax = minMax;
+        }
 
-        GrayscaleConversionInput(byte index) {
-            this.index = index;
+        private final float[] minMax;
+
+        @Override
+        public float[] getMinMax() {
+            return minMax;
         }
 
         @Override
@@ -23,10 +28,6 @@ public class GrayscaleConversionOperator extends OperatorImplementation {
             return name();
         }
 
-        @Override
-        public byte getIndex() {
-            return index;
-        }
     }
 
     /**
@@ -38,11 +39,11 @@ public class GrayscaleConversionOperator extends OperatorImplementation {
 
     @Override
     protected void addOpcode(OpcodeData opCodes) {
-        opCodes.addOpcode(getOperator().opCode);
+        opCodes.addOpcode(getKey(), getOperator().opCode);
     }
 
     @Override
-    protected OpcodeInput[] getInputs() {
+    protected OpcodeInput[] internalGetOperatorInputs() {
         return GrayscaleConversionInput.values();
     }
 

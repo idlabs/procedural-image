@@ -14,27 +14,27 @@ package com.ikea.spatiallab.procedural.operators;
 public class LevelsOperator extends OperatorImplementation {
 
     private enum LevelsInput implements OpcodeInput {
-        input((byte) 0),
-        black_point((byte) 1),
-        white_point((byte) 2),
-        gamma((byte) 3),
-        output_from((byte) 4),
-        output_to((byte) 5);
+        input(),
+        black_point(),
+        white_point(),
+        gamma(),
+        output_from(),
+        output_to();
 
-        private final byte index;
+        LevelsInput(float... minMax) {
+            this.minMax = minMax;
+        }
 
-        LevelsInput(byte index) {
-            this.index = index;
+        private final float[] minMax;
+
+        @Override
+        public float[] getMinMax() {
+            return minMax;
         }
 
         @Override
         public String getName() {
             return name();
-        }
-
-        @Override
-        public byte getIndex() {
-            return index;
         }
     }
 
@@ -44,11 +44,11 @@ public class LevelsOperator extends OperatorImplementation {
 
     @Override
     protected void addOpcode(OpcodeData opCodes) {
-        opCodes.addOpcode(getOperator().opCode);
+        opCodes.addOpcode(getKey(), getOperator().opCode);
     }
 
     @Override
-    protected OpcodeInput[] getInputs() {
+    protected OpcodeInput[] internalGetOperatorInputs() {
         return LevelsInput.values();
     }
 

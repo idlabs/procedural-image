@@ -9,25 +9,25 @@ package com.ikea.spatiallab.procedural.operators;
 public class NoiseOperator extends OperatorImplementation {
 
     private enum NoiseInput implements OpcodeInput {
-        position((byte) 0),
-        min_level((byte) 1),
-        max_level((byte) 2),
-        beta((byte) 3);
+        position(),
+        min_level(0f, 10f),
+        max_level(0f, 10f),
+        beta(0f, 8f);
 
-        private final byte index;
+        NoiseInput(float... minMax) {
+            this.minMax = minMax;
+        }
 
-        NoiseInput(byte index) {
-            this.index = index;
+        private final float[] minMax;
+
+        @Override
+        public float[] getMinMax() {
+            return minMax;
         }
 
         @Override
         public String getName() {
             return name();
-        }
-
-        @Override
-        public byte getIndex() {
-            return index;
         }
     }
 
@@ -37,11 +37,11 @@ public class NoiseOperator extends OperatorImplementation {
 
     @Override
     protected void addOpcode(OpcodeData opCodes) {
-        opCodes.addOpcode(getOperator().opCode);
+        opCodes.addOpcode(getKey(), getOperator().opCode);
     }
 
     @Override
-    protected OpcodeInput[] getInputs() {
+    protected OpcodeInput[] internalGetOperatorInputs() {
         return NoiseInput.values();
     }
 

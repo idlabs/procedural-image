@@ -310,7 +310,7 @@
     "n22": {
       "operation": "sawtooth_wave",
       "parameters": {
-        "vector": {
+        "input": {
           "$ref": "#/operations/n21"
         }
       }

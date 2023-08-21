@@ -9,22 +9,23 @@ package com.ikea.spatiallab.procedural.operators;
 public class VoronoiOperator extends OperatorImplementation {
 
     private enum VoronoiInput implements OpcodeInput {
-        input((byte) 0);
+        randomness(0f, 1f),
+        position();
 
-        private final byte index;
+        VoronoiInput(float... minMax) {
+            this.minMax = minMax;
+        }
 
-        VoronoiInput(byte index) {
-            this.index = index;
+        private final float[] minMax;
+
+        @Override
+        public float[] getMinMax() {
+            return minMax;
         }
 
         @Override
         public String getName() {
             return name();
-        }
-
-        @Override
-        public byte getIndex() {
-            return index;
         }
     }
 
@@ -34,11 +35,11 @@ public class VoronoiOperator extends OperatorImplementation {
 
     @Override
     protected void addOpcode(OpcodeData opCodes) {
-        opCodes.addOpcode(getOperator().opCode);
+        opCodes.addOpcode(getKey(), getOperator().opCode);
     }
 
     @Override
-    protected OpcodeInput[] getInputs() {
+    protected OpcodeInput[] internalGetOperatorInputs() {
         return VoronoiInput.values();
     }
 

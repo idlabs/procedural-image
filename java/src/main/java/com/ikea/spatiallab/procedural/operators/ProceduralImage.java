@@ -3,7 +3,9 @@
  */
 package com.ikea.spatiallab.procedural.operators;
 
+import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -32,12 +34,18 @@ public class ProceduralImage {
         }
     }
 
+    public static final String EXTRAS = "extras";
     public static final String OPERATORS = "operations";
     public static final String OUTPUTS = "outputs";
     public static final String ASSET = "asset";
+    public static final String OFFSET = "offset";
+    public static final String SCALE = "scale";
 
     @SerializedName(ASSET)
     private Asset asset;
+
+    @SerializedName(EXTRAS)
+    private Extras extras;
 
     @SerializedName(OPERATORS)
     private HashMap<String, Operator> operations;
@@ -45,9 +53,33 @@ public class ProceduralImage {
     @SerializedName(OUTPUTS)
     private HashMap<String, Reference> outputs;
 
+    @SerializedName(OFFSET)
+    private float[] offset;
+
+    @SerializedName(SCALE)
+    private float[] scale;
+
     private transient int inputFloatIndex = 0;
     private transient int inputVec4Index = 0;
     private transient int outputIndex = 0;
+    private transient Hashtable<String, IndexParameter> outputLinks = new Hashtable<String, IndexParameter>();
+    protected transient ArrayDeque<String> refStack = new ArrayDeque<>();
+
+    /**
+     * 
+     * @return
+     */
+    public float[] getScale() {
+        return scale != null ? scale : new float[] { 2, 2, 2 };
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public float[] getOffset() {
+        return offset != null ? offset : new float[] { -1, -1, -1 };
+    }
 
     /**
      * Returns the asset info
@@ -126,7 +158,7 @@ public class ProceduralImage {
      * @param reference
      * @return
      */
-    protected OperatorListResolver getOperatorQueue(Reference reference) {
+    public OperatorRecipe getOperatorQueue(Reference reference) {
         OperatorImplementation op = getOperator(reference);
         return op.getOperatorQueue(this);
     }
@@ -137,7 +169,7 @@ public class ProceduralImage {
      * @param target
      * @return
      */
-    public OperatorListResolver getOutputOperatorQueue(Target target) {
+    public OperatorRecipe getOutputOperatorQueue(Target target) {
         resetIndexes();
         Reference output = getOutput(target);
         return getOperatorQueue(output);
@@ -150,6 +182,8 @@ public class ProceduralImage {
         inputFloatIndex = 0;
         inputVec4Index = 0;
         outputIndex = 0;
+        outputLinks.clear();
+        refStack.clear();
     }
 
     /**
@@ -184,6 +218,36 @@ public class ProceduralImage {
 
     /**
      * 
+     * @param ref
+     * @return
+     */
+    protected IndexParameter getOutputLink(Reference ref) {
+        return outputLinks.get(ref.getOperatorReference());
+    }
+
+    /**
+     * 
+     * @param ref
+     * @return
+     */
+    protected IndexParameter getOutputLink(String ref) {
+        return outputLinks.get(ref);
+    }
+
+    /**
+     * 
+     * @param ref
+     */
+    protected void setOutputLink(IndexParameter outParam, String ref) {
+        if (outputLinks.contains(ref)) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "Already added outputlink for key "
+                    + ref);
+        }
+        outputLinks.put(ref, outParam);
+    }
+
+    /**
+     * 
      * @return
      */
     protected int getInputIndex(IndexType type) {
@@ -211,7 +275,12 @@ public class ProceduralImage {
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Parameter.class, new Parameter());
         builder.registerTypeAdapter(Operator.class, new OperatorDeserializer(builder.create()));
+        builder.registerTypeAdapter(Extras.class, new Extras());
         return builder.create();
+    }
+
+    public Extras getExtras() {
+        return extras;
     }
 
 }

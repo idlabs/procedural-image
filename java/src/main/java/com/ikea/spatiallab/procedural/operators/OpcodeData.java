@@ -7,6 +7,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
+import java.util.HashMap;
+import java.util.Objects;
 
 import com.ikea.digitallabs.dela.Buffers;
 import com.ikea.digitallabs.dela.ErrorMessage;
@@ -21,7 +23,40 @@ import com.ikea.spatiallab.procedural.operators.OperatorImplementation.FloatInpu
  */
 public class OpcodeData {
 
+    public static class OpcodeBlob {
+
+        private OpcodeBlob(ByteBuffer opCodes) {
+            ShortBuffer opCodeShort = opCodes.asShortBuffer();
+            int pos = opCodes.position();
+
+            short val = opCodeShort.get();
+            opcode = (byte) (val & 0x0ff);
+            param = (byte) ((val >>> 8) & 0x0ff);
+            val = opCodeShort.get();
+            outputIndex = (byte) (val & 0x0ff);
+            inputCount = (byte) ((val >>> 8) & 0x0ff);
+            inputIndexes = new short[inputCount];
+            for (int i = 0; i < inputCount; i++) {
+                inputIndexes[i] = opCodeShort.get();
+            }
+            opCodes.position(pos + opCodeShort.position() * Short.BYTES);
+        }
+
+        byte opcode;
+        byte param;
+        byte outputIndex;
+        byte inputCount;
+        short[] inputIndexes;
+
+        public short[] getInputIndexes() {
+            return inputIndexes;
+        }
+
+    }
+
     public static final int OPCODE_HEADER_SIZE = 4;
+    public static final int OPCODE_OPSIZE = 4; // Size per operator
+    public static final int OPCODE_INDEXSIZE = Short.BYTES;
     public static final String OPCODE_MAGIC = "PI";
 
     private ByteBuffer opCodes;
@@ -31,6 +66,48 @@ public class OpcodeData {
     private int indexInputCount = 0;
     private int vec4InputCount = 0;
     private int opCodeCount = 0;
+    private HashMap<String, OpcodeBag> opcodeOffsets = new HashMap<String, OpcodeBag>();
+
+    public class OpcodeBag {
+
+        public final int offset;
+        public final int index;
+        public final String key;
+        private int drawCount = -1; // Number of opcodes to draw
+
+        private OpcodeBag(String key, int index, int offset) {
+            this.key = key;
+            this.index = index;
+            this.offset = offset;
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + Objects.hash(key);
+            return result;
+        }
+
+        /**
+         * Sets the number of opcodes to draw
+         * 
+         * @param count
+         */
+        public void setDrawCount(int count) {
+            this.drawCount = count;
+        }
+
+        /**
+         * Returns the number of opcodes to draw
+         * 
+         * @return
+         */
+        public int getDrawCount() {
+            return drawCount;
+        }
+
+    }
 
     protected OpcodeData(int opCodeByteSize, int floatInputByteSize, int vec4InputSize) {
         opCodes = ByteBuffer.allocateDirect(opCodeByteSize).order(ByteOrder.LITTLE_ENDIAN);
@@ -54,7 +131,8 @@ public class OpcodeData {
      * 
      * @param opCode
      */
-    protected void addOpcode(byte opCode) {
+    protected void addOpcode(String key, byte opCode) {
+        opcodeOffsets.put(key, new OpcodeBag(key, opCodeCount, opCodes.position()));
         opCodes.put(opCode);
         opCodes.put((byte) -1);
         opCodeCount++;
@@ -66,7 +144,8 @@ public class OpcodeData {
      * @param opCode
      * @param param
      */
-    protected void addOpcode(byte opCode, byte param) {
+    protected void addOpcode(String key, byte opCode, byte param) {
+        opcodeOffsets.put(key, new OpcodeBag(key, opCodeCount, opCodes.position()));
         opCodes.put(opCode);
         opCodes.put(param);
         opCodeCount++;
@@ -81,24 +160,6 @@ public class OpcodeData {
     protected void addOutIndexAndInCount(IndexParameter outputIndex, byte inputCount) {
         opCodes.put((byte) outputIndex.index);
         opCodes.put(inputCount);
-    }
-
-    /**
-     * Adds an opcode and parameter
-     * 
-     * @param opCode
-     * @param param
-     * @param outputIndex
-     */
-    protected void addOpcode(byte opCode, byte param, IndexParameter outputIndex, byte inputCount) {
-        if (!outputIndex.isOutput()) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.message + "index parameter is not output");
-        }
-        opCodes.put(opCode);
-        opCodes.put(param);
-        opCodes.put((byte) outputIndex.index);
-        opCodes.put(inputCount);
-        opCodeCount++;
     }
 
     /**
@@ -159,21 +220,28 @@ public class OpcodeData {
     }
 
     /**
+     * 
+     * @return
+     */
+    public OpcodeBlob getBlob() {
+        synchronized (opCodes) {
+            if (opCodes.position() < OPCODE_HEADER_SIZE) {
+                opCodes.position(OPCODE_HEADER_SIZE);
+            }
+            if (opCodes.position() == opCodes.capacity()) {
+                return null;
+            }
+            return new OpcodeBlob(opCodes);
+        }
+    }
+
+    /**
      * Returns the number of index inputs
      * 
      * @return
      */
     protected int getIndexInputCount() {
         return indexInputCount;
-    }
-
-    /**
-     * Returns the position in the opcode buffer in bytes
-     * 
-     * @return
-     */
-    protected int getOpcodeBufferPosition() {
-        return opCodes.position();
     }
 
     /**
@@ -204,12 +272,24 @@ public class OpcodeData {
     }
 
     /**
-     * Returns the opcode buffer at position .
+     * Returns the opcode buffer at the operator with the key, returns null if not found
+     * 
+     * This method is not threadsafe
      * 
      * @return
      */
-    protected ByteBuffer getOpcodeBuffer(int position) {
-        return opCodes.position(position);
+    public ByteBuffer getOpcodeBuffer(String operatorKey) {
+        OpcodeBag op = opcodeOffsets.get(operatorKey);
+        return op == null ? null : opCodes.position(op.offset);
+    }
+
+    /**
+     * Returns the opcode bag for the key, returns null if not found
+     * 
+     * @return
+     */
+    public OpcodeBag getOpcodeOffset(String operatorKey) {
+        return opcodeOffsets.get(operatorKey);
     }
 
     /**
@@ -219,6 +299,22 @@ public class OpcodeData {
      */
     public ByteBuffer getVec4DataBuffer() {
         return vec4Inputs.position(0);
+    }
+
+    /**
+     * Returns an array with 4 floats for the input data index.
+     * 
+     * @param inputIndex
+     * @return
+     */
+    public float[] getVec4(short inputIndex) {
+        if (IndexParameter.isOutput(inputIndex)) {
+            return null;
+        }
+        float[] result = new float[4];
+        vec4Inputs.position(inputIndex * FloatInputData.VEC4_SIZE_IN_BYTES);
+        vec4Inputs.asFloatBuffer().get(result);
+        return result;
     }
 
     /**
@@ -237,7 +333,9 @@ public class OpcodeData {
      * @return
      */
     public boolean validate() {
-        return (floatInputCount * Float.BYTES == floatInputs.capacity())
+        return ((opCodeCount * OpcodeData.OPCODE_OPSIZE + indexInputCount * OpcodeData.OPCODE_INDEXSIZE
+                + OpcodeData.OPCODE_HEADER_SIZE) == opCodes.capacity())
+                & (floatInputCount * Float.BYTES == floatInputs.capacity())
                 & (vec4InputCount * 4 * Float.BYTES == vec4Inputs.capacity());
     }
 
@@ -248,7 +346,7 @@ public class OpcodeData {
         StringBuffer data = new StringBuffer();
         ByteBuffer opBuffer = getOpcodeBuffer();
         data.append("HEADER: " + new String(new char[] { (char) opBuffer.get(), (char) opBuffer.get() }) + "\n");
-        int opCount = opBuffer.get();
+        int opCount = (opBuffer.get() & 0x0ff);
         data.append("OPCODECOUNT: " + opCount + "\n");
         opBuffer.get();
         for (int loop = 0; loop < opCount; loop++) {

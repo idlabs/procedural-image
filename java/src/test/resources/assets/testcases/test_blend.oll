@@ -7,10 +7,10 @@
         "n1": {
             "operation": "blend",
             "parameters": {
+                "opacity": 0.543,
                 "blend_mode": 0,
-                "foreground": [0.1,0.2,0.3,1],
                 "background": [0.4,0.5,0.6,1],
-                "opacity": 0.543
+                "foreground": [0.1,0.2,0.3,1]
             }
         },
         "n2": {

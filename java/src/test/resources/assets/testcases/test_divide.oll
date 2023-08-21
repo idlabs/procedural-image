@@ -5,14 +5,20 @@
     },
     "operations": {
         "n1": {
-          "operation": "position"
-        },
-        "positiontrs": {
-          "operation": "position",
+          "operation": "divide",
           "parameters": {
-              "offset": [0,0,0],
-              "rotate": [0,0,0,1],
-              "scale": [1,1,1]
+            "dividend": [
+              1,
+              1,
+              1,
+              0.0
+            ],
+            "divisor": [
+              4,
+              4,
+              4,
+              0.0
+            ]
           }
         }
     },

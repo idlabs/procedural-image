@@ -1,17 +1,11 @@
-/**
- * Copyright Ikea Communications AB
- */
 package com.ikea.spatiallab.procedural.operators;
 
-/**
- *
- */
-public class UniformColorOperator extends OperatorImplementation {
+public class SawtoothWaveOperator extends OperatorImplementation {
 
-    private enum UniformColorInput implements OpcodeInput {
-        output_color();
+    private enum SawtoothWaveInput implements OpcodeInput {
+        input();
 
-        UniformColorInput(float... minMax) {
+        SawtoothWaveInput(float... minMax) {
             this.minMax = minMax;
         }
 
@@ -26,9 +20,10 @@ public class UniformColorOperator extends OperatorImplementation {
         public String getName() {
             return name();
         }
+
     }
 
-    protected UniformColorOperator(Operator source) {
+    protected SawtoothWaveOperator(Operator source) {
         super(source);
     }
 
@@ -39,7 +34,7 @@ public class UniformColorOperator extends OperatorImplementation {
 
     @Override
     protected OpcodeInput[] internalGetOperatorInputs() {
-        return UniformColorInput.values();
+        return SawtoothWaveInput.values();
     }
 
 }
