@@ -9,6 +9,8 @@ One goal is to be able to use these images as texture sources in 3D content (com
 It shall be possible to generate source images on target devices in runtime without prohibitive time consumption.  
 Times for generation of images shall typically be in the region of the time it takes to decode png/jpeg images, obviously this depends on the complexity of the procedural recipe.    
 
+It shall be possible to change parameters in the operator list to generate different 'takes' on the same image, for instance changing some values will produce a darker or more grainy wood texture.  
+
 The core of `procedural image` is made up by the operator list.  
 This list is the set of commands or operators that make up a recipe for generating source images.  
 
@@ -204,16 +206,46 @@ Below is outputs with different world scale and offsets, this controls what the 
 ![image](https://github.com/idlabs/procedural-image/assets/3063192/4867cfb6-1920-41d6-bd08-9503f87752af) | ![image](https://github.com/idlabs/procedural-image/assets/3063192/1cca050d-99a9-4792-b071-c3681e666f90)
 
 
-### Sawtooth Wave
+### Repeat
 
-Operator name: `sawtooth_wave`
+Operator name: `fraction`
 
 **parameters**
 - `input` vec3
 
-Applies a sawtooth wave function to each channel of the input vector.
+Returns the fractional part as a vector, the fractional part is the difference between the value and the floor (of the value):  
+vec3 result = input - floor(input)  
 
 **Example**
+
+## Absolute value
+
+Operator name: `abs`  
+
+**parameters**
+- `input` vec3
+
+Returns the absolute value of the input:  
+vec3 result = abs(input)  
+
+**Example**
+
+## Random
+
+Operator name: `random`  
+
+**parameters**
+- `input` vec3
+- `offset_factor` vec3
+- `offset_seed` vec3
+- `scale_factor` vec3
+- `scale_seed` vec3
+  
+
+Applies a random factor to the input.  
+
+**Example**
+
 
 ### Levels
 Operator name:`levels`
