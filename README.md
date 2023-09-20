@@ -449,5 +449,84 @@ Operator name:`l2_norm`
 
 ## 4. Example
 
+```
+{
+    "asset": {
+        "version": "1.0",
+        "generator": "manual"
+    },
+    "offset": [-1,-1,0],
+    "scale": [2,2,2],
+    "operations": {
+        "generator": {
+            "operation": "position"
+        },
+        "noise": {
+          "operation": "noise",
+          "parameters": {
+              "position":  { "$ref": "#/operations/generator" },
+              "min_level": 0,
+              "max_level": 1,
+              "beta": 1.0
+          }
+        },
+        "voronoiposition": {
+            "operation": "voronoi",
+            "parameters": {
+                "position": {
+                    "$ref": "#/operations/generator"
+                },
+                "randomness": 0.3957
+            }
+        },
+        "voronoiscaled": {
+            "operation": "voronoi",
+            "parameters": {
+                "position": {
+                    "$ref": "#/operations/generator"
+                },
+                "randomness": 0.9865
+            }
+        },
+        "blend-noise-voronoi": {
+            "operation": "blend",
+            "parameters": {
+                "blend_mode": 0,
+                "foreground": { "$ref": "#/operations/noise" },
+                "background": { "$ref": "#/operations/voronoiposition" },
+                "opacity": 0.5
+            }
+        },
+        "blend2": {
+            "operation": "blend",
+            "parameters": {
+                "blend_mode": 4,
+                "foreground": { "$ref": "#/operations/blend-noise-voronoi" },
+                "background":  { "$ref": "#/operations/voronoiscaled" },
+                "opacity": 0.8
+            }
+        },
+        "to-gray": {
+          "operation": "grayscale_conversion",
+          "parameters": {
+              "input": [{ "$ref": "#/operations/blend2" },
+              "weights": [0.4,0.5,0.6,1]
+          }
+        }
+        
+    },
+    "outputs": {
+        "base_color": {
+            "$ref": "#/operations/to-gray"
+        },
+        "roughness": {
+            "$ref": "#/operations/to-gray"
+        },
+        "normal": {
+            "$ref": "#/operations/to-gray"
+        }
+    }
+}
 
+```
 
