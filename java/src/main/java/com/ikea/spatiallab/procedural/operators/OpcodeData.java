@@ -8,7 +8,6 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 import java.util.HashMap;
-import java.util.Objects;
 
 import com.ikea.digitallabs.dela.Buffers;
 import com.ikea.digitallabs.dela.ErrorMessage;
@@ -85,8 +84,23 @@ public class OpcodeData {
         public int hashCode() {
             final int prime = 31;
             int result = 1;
-            result = prime * result + Objects.hash(key);
+            result = prime * result + ((key == null) ? 0 : key.hashCode());
             return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            OpcodeBag other = (OpcodeBag) obj;
+            if (key == null) {
+                return other.key == null;
+            }
+            return key.equals(other.key);
         }
 
         /**

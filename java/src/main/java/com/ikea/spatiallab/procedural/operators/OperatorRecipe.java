@@ -111,6 +111,12 @@ public class OperatorRecipe {
             return operator.getInputData(input.getName(), indexes);
         }
 
+        /**
+         * Returns the inputdata for the parametername
+         * 
+         * @param parameterName
+         * @return
+         */
         public InputData<?> getInputData(String parameterName) {
             return operator.getInputData(parameterName, indexes);
         }
@@ -415,6 +421,11 @@ public class OperatorRecipe {
         return opCodes;
     }
 
+    /**
+     * Sets the zoom factor
+     * 
+     * @param zoomFactor
+     */
     public void setZoom(float zoomFactor) {
         this.zoom = zoomFactor;
     }

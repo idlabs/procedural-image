@@ -178,7 +178,7 @@ public class ProceduralImage {
     /**
      * 
      */
-    protected void resetIndexes() {
+    public void resetIndexes() {
         inputFloatIndex = 0;
         inputVec4Index = 0;
         outputIndex = 0;
@@ -279,6 +279,11 @@ public class ProceduralImage {
         return builder.create();
     }
 
+    /**
+     * Returns the extras object or null
+     * 
+     * @return
+     */
     public Extras getExtras() {
         return extras;
     }
